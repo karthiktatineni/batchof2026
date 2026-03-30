@@ -1,15 +1,15 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from './Navigation.module.css';
 
 const navLinks = [
-  { label: 'Journey', href: '#chapters' },
-  { label: 'Memories', href: '#gallery' },
-  { label: 'Timeline', href: '#timeline' },
-  { label: 'Stories', href: '#stories' },
-  { label: 'Wall', href: '#messages' },
-  { label: 'Farewell', href: '#farewell' },
+  { label: 'Journey', href: '/#chapters' },
+  { label: 'Memories', href: '/#gallery' },
+  { label: 'Timeline', href: '/#timeline' },
+  { label: 'Wall', href: '/#messages' },
+  { label: 'Meet the Class', href: '/class' },
 ];
 
 export default function Navigation() {
@@ -27,21 +27,21 @@ export default function Navigation() {
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} id="main-nav">
       <div className={styles.inner}>
-        <a href="#" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <span className={styles.logoIcon}>✦</span>
           <span className={styles.logoText}>Memories</span>
-        </a>
+        </Link>
 
         <ul className={`${styles.links} ${menuOpen ? styles.linksOpen : ''}`}>
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className={styles.link}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

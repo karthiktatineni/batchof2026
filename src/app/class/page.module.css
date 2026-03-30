@@ -1,0 +1,135 @@
+.page {
+  min-height: 100vh;
+  padding-top: 120px; /* clear nav */
+  padding-bottom: var(--space-2xl);
+  background-color: var(--color-bg-deep);
+}
+
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--space-2xl);
+  padding: 0 var(--space-md);
+}
+
+.header h1 {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-family: var(--font-display);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.header p {
+  font-size: var(--text-heading-3);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1400px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  background-color: var(--color-bg-card);
+}
+
+.imageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: grayscale(100%) contrast(1.1);
+}
+
+.card:hover .imageContainer {
+  transform: scale(1.05); /* Slight zooom */
+  filter: grayscale(0%) contrast(1); /* Reveal color */
+}
+
+/* Base image styling if not using Next/Image or alongside it */
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Gradient Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(14, 14, 14, 0.9) 100%
+  );
+  z-index: 1;
+  opacity: 0.8;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover .overlay {
+  opacity: 0.6; /* Let image show more */
+}
+
+.info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: var(--space-lg);
+  z-index: 2;
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card:hover .info {
+  transform: translateY(0); /* Nudge up on hover */
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.role {
+  font-family: var(--font-accent);
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-gold);
+}
