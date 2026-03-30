@@ -9,7 +9,7 @@ export default function Footer() {
         <div className={styles.content}>
           <div className={styles.brand}>
             <span className={styles.logoIcon}>✦</span>
-            <span className={styles.logoText}>College Memories</span>
+            <span className={styles.logoText}>College Digitalyearbook</span>
           </div>
 
           <div className={styles.links}>
@@ -20,8 +20,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          {/*© {new Date().getFullYear()} Batch of '25. All memories preserved.*/}
-          <p className={styles.credit}>Crafted with 🤍 for the alumni</p>
+          <p className={styles.credit}>Crafted with 🤍 By Karthik,Nitish</p>
         </div>
       </div>
     </footer>

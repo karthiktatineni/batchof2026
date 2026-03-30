@@ -9,6 +9,7 @@ const hotspots = [
   { id: 2, x: 45, y: 40, icon: Music, title: 'Open Auditorium', desc: 'Where fests came alive and we danced until our feet gave out.' },
   { id: 3, x: 60, y: 65, icon: Store, title: 'Canteen', desc: 'Food, Endless debates, and Bunks' },
   { id: 4, x: 52, y: 73, icon: BookOpen, title: 'PAT block', desc: 'The quietest place on campus, mostly used for catching up on sleep.' },
+  { id: 5, x: 69, y: 55, icon: BookOpen, title: 'THE LAKE', desc: 'The quietest place on campus, mostly used for catching up on sleep.' },
 ];
 
 export default function CampusMap() {
