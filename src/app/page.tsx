@@ -4,9 +4,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Layout
-import Navigation from '@/components/layout/Navigation';
-import Footer from '@/components/layout/Footer';
+
 
 // Sections
 import Hero from '@/components/sections/Hero';
@@ -111,7 +109,6 @@ export default function Home() {
 
   return (
     <main ref={mainRef}>
-      <Navigation />
       <Hero />
       <ChapterScroll />
       <BounceCardsSection />
@@ -123,7 +120,6 @@ export default function Home() {
       <AchievementsSection />
       <MessagesWall />
       <FarewellSection />
-      <Footer />
     </main>
   );
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navigation from '@/components/layout/Navigation';
+import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: "College Memories — A Thousand Stories, One Journey",
@@ -23,7 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="grain-overlay" aria-hidden="true" />
+        <Navigation />
         {children}
+        <Footer />
       </body>
     </html>
   );

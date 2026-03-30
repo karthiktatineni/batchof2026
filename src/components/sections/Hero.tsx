@@ -2,8 +2,13 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import styles from './Hero.module.css';
 import { ArrowDown } from 'lucide-react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollToPlugin);
+}
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -58,6 +63,39 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const startJourney = (e: React.MouseEvent) => {
+    e.preventDefault();
+    gsap.killTweensOf(window);
+    
+    // Auto-scroll cinematic sequence
+    const tl = gsap.timeline();
+    
+    tl.to(window, { scrollTo: '#chapters', duration: 2.5, ease: 'power2.inOut' })
+      .to({}, { duration: 1.5 })
+      .to(window, { scrollTo: '#gallery', duration: 4, ease: 'power1.inOut' })
+      .to({}, { duration: 1.5 })
+      .to(window, { scrollTo: '#map', duration: 5, ease: 'power1.inOut' })
+      .to({}, { duration: 3 })
+      .to(window, { scrollTo: '#messages', duration: 6, ease: 'power1.inOut' })
+      .to({}, { duration: 2 })
+      .to(window, { scrollTo: '#farewell', duration: 5, ease: 'power2.out' });
+      
+    const stopScroll = () => {
+      tl.kill();
+      gsap.killTweensOf(window);
+      window.removeEventListener('wheel', stopScroll);
+      window.removeEventListener('touchstart', stopScroll);
+      window.removeEventListener('click', stopScroll);
+    };
+    
+    window.addEventListener('wheel', stopScroll, { passive: true });
+    window.addEventListener('touchstart', stopScroll, { passive: true });
+    setTimeout(() => {
+      window.addEventListener('click', stopScroll);
+    }, 100);
+  };
+
+
   return (
     <section className={styles.hero} ref={heroRef} id="hero">
       {/* Background Layers */}
@@ -88,7 +126,7 @@ export default function Hero() {
         </p>
         
         <div className={styles.ctaWrapper} ref={ctaRef}>
-          <a href="#chapters" className={styles.primaryBtn}>
+          <a href="#chapters" className={styles.primaryBtn} onClick={startJourney}>
             <span className={styles.btnBackground}></span>
             <span className={styles.btnText}>Start the Journey</span>
           </a>

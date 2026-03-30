@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import styles from './Navigation.module.css';
 
 const navLinks = [
+  { label: 'Home', href: '/' },
   { label: 'Journey', href: '/#chapters' },
   { label: 'Memories', href: '/#gallery' },
   { label: 'Timeline', href: '/#timeline' },
