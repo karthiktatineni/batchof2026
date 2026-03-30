@@ -1,0 +1,85 @@
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-deep);
+  background-image: radial-gradient(circle at center, rgba(200, 149, 108, 0.05) 0%, var(--color-bg-deep) 70%);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xl);
+  max-width: 800px;
+  text-align: center;
+}
+
+.headline {
+  font-size: var(--text-hero);
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+.letterWrapper {
+  position: relative;
+  background: var(--color-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl) var(--space-md);
+  margin-top: var(--space-md);
+  text-align: left;
+  border-top-color: var(--color-accent-warm);
+}
+
+.signatureMark {
+  position: absolute;
+  top: -40px;
+  right: 20px;
+  font-family: 'Brush Script MT', cursive, var(--font-display);
+  font-size: 5rem;
+  color: var(--color-border-strong);
+  opacity: 0.3;
+  transform: rotate(-10deg);
+}
+
+.intro {
+  font-family: var(--font-accent);
+  color: var(--color-accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--text-label);
+  margin-bottom: var(--space-md);
+}
+
+.letterWrapper p {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-primary);
+  opacity: 0.9;
+}
+
+.signoff {
+  margin-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-md);
+}
+
+.batchName {
+  font-family: var(--font-display);
+  font-size: var(--text-subtitle);
+  color: var(--color-accent-warm);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.footerAction {
+  margin-top: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .letterWrapper {
+    padding: var(--space-xl) var(--space-xl);
+  }
+}

@@ -1,0 +1,86 @@
+.footer {
+  background-color: var(--color-bg-deep);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-xl) 0 var(--space-md);
+  color: var(--color-text-secondary);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  text-align: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoIcon {
+  font-size: 1.5rem;
+  color: var(--color-accent-warm);
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+}
+
+.links a {
+  font-family: var(--font-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--text-label);
+  color: var(--color-text-secondary);
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: var(--color-accent-warm);
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: var(--space-lg);
+  font-size: var(--text-caption);
+}
+
+.credit {
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .content {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
