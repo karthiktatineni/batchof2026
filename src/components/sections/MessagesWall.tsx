@@ -27,44 +27,6 @@ const messages = [
 ];
 
 export default function MessagesWall() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    // Disable ScrollTrigger if placed inside a scrollable container to prevent issues, 
-    // or we can attach the trigger to the scroll wrapper. 
-    // Simple solution: animate on load or use an IntersectionObserver.
-    // Given the GSAP animation, we will just let it trigger when the wall is viewed.
-    
-    if (!containerRef.current) return;
-
-    // Use a simple animation inside the scrollable view
-    cardsRef.current.forEach((card, index) => {
-      if (!card) return;
-      gsap.fromTo(card,
-        {
-          y: 40,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          delay: (index % 4) * 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            scroller: containerRef.current, // Target the wrapper
-            start: 'top 95%',
-            toggleActions: 'play none none none',
-          }
-        }
-      );
-    });
-
-    return () => ScrollTrigger.getAll().forEach(t => t.kill());
-  }, []);
-
   return (
     <section className={`section ${styles.section}`} id="messages">
       <div className={`container ${styles.container}`}>
@@ -74,19 +36,24 @@ export default function MessagesWall() {
           <p className="reveal">Scribbles from the heart, digitized for eternity.</p>
         </div>
 
-        <div className={styles.scrollWrapper} ref={containerRef}>
-          <div className={styles.masonryGrid}>
-            {messages.map((message, i) => (
-              <div
-                key={message.id}
-                className={styles.messageCard}
-                ref={(el) => { cardsRef.current[i] = el; }}
-              >
-                <div className={styles.quoteMark}>"</div>
-                <p className={styles.text}>{message.text}</p>
-                <p className={styles.author}>— {message.author}</p>
-              </div>
-            ))}
+        <div className={styles.marqueeContainer}>
+          <div className={styles.marqueeTrack}>
+            {[...messages, ...messages].map((message, i) => {
+              const yOffset = i % 3 === 0 ? '-40px' : i % 3 === 1 ? '40px' : '0px';
+              const rotate = i % 2 === 0 ? '-4deg' : '4deg';
+              
+              return (
+                <div
+                  key={`msg-${i}`}
+                  className={styles.messageCard}
+                  style={{ transform: `translateY(${yOffset}) rotate(${rotate})` }}
+                >
+                  <div className={styles.quoteMark}>"</div>
+                  <p className={styles.text}>{message.text}</p>
+                  <p className={styles.author}>— {message.author}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
