@@ -71,8 +71,8 @@ export default function CircularGallery({
       }
     `;
 
-    // Geometry & Material
-    const geometry = new Plane(gl, { width: 1.5, height: 2, widthSegments: 20 });
+    // Geometry & Material (Increased size to 2x3)
+    const geometry = new Plane(gl, { width: 2.0, height: 3.0, widthSegments: 20 });
     const program = new Program(gl, {
       vertex,
       fragment,
@@ -84,7 +84,7 @@ export default function CircularGallery({
     });
 
     const items: Mesh[] = [];
-    const numItems = 8;
+    const numItems = 12; // Increased from 8 to 12
     for (let i = 0; i < numItems; i++) {
         const mesh = new Mesh(gl, { geometry, program });
         mesh.setParent(scene);
@@ -95,9 +95,13 @@ export default function CircularGallery({
     let scrollCurrent = 0;
 
     const onWheel = (e: WheelEvent) => {
+      // Prevent browser default scroll if the gallery is in focus
+      e.preventDefault();
       scrollTarget += e.deltaY * 0.001 * scrollSpeed;
     };
-    containerRef.current.addEventListener('wheel', onWheel, { passive: true });
+    
+    // Set passive: false to allow e.preventDefault()
+    containerRef.current.addEventListener('wheel', onWheel, { passive: false });
 
     let requestID: number;
     const update = () => {
@@ -107,9 +111,9 @@ export default function CircularGallery({
       
       items.forEach((mesh, i) => {
         const angle = (i / numItems) * Math.PI * 2 + scrollCurrent;
-        const radius = 3;
+        const radius = 4.5; // Increased cylinder radius
         mesh.position.x = Math.sin(angle) * radius;
-        mesh.position.z = Math.cos(angle) * radius - 2;
+        mesh.position.z = Math.cos(angle) * radius - 3.5; // Adjusted offset for better visibility
         mesh.rotation.y = angle;
       });
 

@@ -58,8 +58,8 @@
 
 .galleryWrapper {
   width: 100%;
-  height: 60vh;
-  min-height: 500px;
+  height: 80vh;
+  min-height: 600px;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   position: relative;

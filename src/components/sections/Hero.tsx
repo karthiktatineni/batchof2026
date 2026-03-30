@@ -44,13 +44,13 @@ export default function Hero() {
         { y: 0, opacity: 1, duration: 1 },
         "-=0.8"
       );
-      
+
     // Reactive mouse movement for the background
     const handleMouseMove = (e: MouseEvent) => {
       if (!meshRef.current) return;
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      
+
       gsap.to(meshRef.current, {
         x: x * 60,
         y: y * 60,
@@ -58,7 +58,7 @@ export default function Hero() {
         ease: 'power2.out',
       });
     };
-    
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
@@ -66,35 +66,28 @@ export default function Hero() {
   const startJourney = (e: React.MouseEvent) => {
     e.preventDefault();
     gsap.killTweensOf(window);
-    
-    // Auto-scroll cinematic sequence
-    const tl = gsap.timeline();
-    
-    tl.to(window, { scrollTo: '#chapters', duration: 2.5, ease: 'power2.inOut' })
-      .to({}, { duration: 1.5 })
-      .to(window, { scrollTo: '#gallery', duration: 4, ease: 'power1.inOut' })
-      .to({}, { duration: 1.5 })
-      .to(window, { scrollTo: '#map', duration: 5, ease: 'power1.inOut' })
-      .to({}, { duration: 3 })
-      .to(window, { scrollTo: '#messages', duration: 6, ease: 'power1.inOut' })
-      .to({}, { duration: 2 })
-      .to(window, { scrollTo: '#farewell', duration: 5, ease: 'power2.out' });
-      
+
+    // Continuous top-to-bottom cinematic scroll
+    const tl = gsap.to(window, {
+      scrollTo: { y: "max" },
+      duration: 35, // Adjust speed as needed
+      ease: 'none', // Straight linear scroll
+      overwrite: 'auto'
+    });
+
     const stopScroll = () => {
       tl.kill();
       gsap.killTweensOf(window);
       window.removeEventListener('wheel', stopScroll);
       window.removeEventListener('touchstart', stopScroll);
-      window.removeEventListener('click', stopScroll);
+      window.removeEventListener('mousedown', stopScroll);
     };
-    
+
+    // User can stop by interacting
     window.addEventListener('wheel', stopScroll, { passive: true });
     window.addEventListener('touchstart', stopScroll, { passive: true });
-    setTimeout(() => {
-      window.addEventListener('click', stopScroll);
-    }, 100);
+    window.addEventListener('mousedown', stopScroll, { passive: true });
   };
-
 
   return (
     <section className={styles.hero} ref={heroRef} id="hero">
@@ -105,14 +98,14 @@ export default function Hero() {
         <div className={styles.noiseOverlay} />
         <div className={styles.vignette} />
       </div>
-      
+
       {/* Main Content */}
       <div className={`container ${styles.content}`}>
         <div className={styles.badge} ref={badgeRef}>
           <span className={styles.badgeIcon}>✦</span>
           <span className={styles.badgeText}>CLASS OF 2026 // DIGITAL YEARBOOK</span>
         </div>
-        
+
         <h1 className={styles.headline} ref={headlineRef}>
           <span className={styles.headlineLine}>More than a</span>
           <span className={styles.headlineLine}>
@@ -120,11 +113,11 @@ export default function Hero() {
           </span>
           <span className={styles.headlineLine}>memories.</span>
         </h1>
-        
+
         <p className={styles.subtitle} ref={subtitleRef}>
           Four years passed like a single breathless moment. This is our digital time capsule—a symphony of late nights, unwritten rules, and friendships that outlasted it all.
         </p>
-        
+
         <div className={styles.ctaWrapper} ref={ctaRef}>
           <a href="#chapters" className={styles.primaryBtn} onClick={startJourney}>
             <span className={styles.btnBackground}></span>
@@ -134,11 +127,6 @@ export default function Hero() {
             <span>Explore Memories</span>
           </a>
         </div>
-      </div>
-
-      <div className={styles.scrollIndicator}>
-        <span className={styles.scrollText}>SCROLL TO EXPLORE</span>
-        <ArrowDown size={16} className={styles.scrollIcon} />
       </div>
     </section>
   );
