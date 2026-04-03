@@ -20,7 +20,7 @@ const navLinks = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -60,16 +60,6 @@ export default function Navigation() {
               </Link>
             </li>
           ))}
-          {user && (
-            <li className={styles.mobileOnly}>
-              <button 
-                onClick={handleLogout} 
-                className={styles.logoutBtnMobile}
-              >
-                Log Out
-              </button>
-            </li>
-          )}
         </ul>
 
         <div className={styles.actions}>

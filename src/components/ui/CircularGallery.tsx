@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
+import { useGesture } from '@use-gesture/react';
 import styles from './CircularGallery.module.css';
 
 interface CircularGalleryProps {
@@ -19,7 +20,6 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
   borderRadius = 12,
   textColor = '#ffffff',
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const rotation = useMotionValue(0);
   
   // Create 12 items for the cylinder
@@ -34,38 +34,41 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
     stiffness: 120,
     mass: 0.5,
     restDelta: 0.001,
-    // Note: scrollEase could be used here if we wanted to dynamically change spring settings
   });
 
-  React.useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (!containerRef.current?.contains(e.target as Node)) return;
-      
-      // Block page scroll
-      e.preventDefault();
-      
-      // Update motion value directly
-      const current = rotation.get();
-      rotation.set(current + e.deltaY * 0.2 * scrollSpeed);
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('wheel', handleWheel, { passive: false });
+  const bind = useGesture(
+    {
+      onDrag: ({ delta: [dx] }) => {
+        const current = rotation.get();
+        rotation.set(current + dx * 0.4);
+      },
+      onWheel: ({ event, delta: [, dy] }) => {
+        // Prevent background page from scrolling
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+        event.stopPropagation();
+        
+        const current = rotation.get();
+        rotation.set(current + dy * 0.2 * scrollSpeed);
+      },
+    },
+    { 
+      drag: { 
+        filterTaps: true,
+        from: () => [0, 0],
+      },
+      wheel: { 
+        eventOptions: { passive: false } 
+      } 
     }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('wheel', handleWheel);
-      }
-    };
-  }, [scrollSpeed, rotation]);
+  );
 
   // Adjust radius based on bend - higher bend means tighter circle (further away)
   const radius = 450 + (bend * 20);
 
   return (
-    <div ref={containerRef} className={styles.wrapper}>
+    <div {...bind()} className={styles.wrapper}>
       <div className={styles.scene}>
         <motion.div 
           className={styles.cylinder}

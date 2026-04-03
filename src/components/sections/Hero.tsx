@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import styles from './Hero.module.css';
+import Link from 'next/link';
 import { ArrowDown } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
@@ -120,12 +121,11 @@ export default function Hero() {
 
         <div className={styles.ctaWrapper} ref={ctaRef}>
           <a href="#chapters" className={styles.primaryBtn} onClick={startJourney}>
-            <span className={styles.btnBackground}></span>
             <span className={styles.btnText}>Start the Journey</span>
           </a>
-          <a href="#gallery" className={styles.ghostBtn}>
-            <span>Explore Memories</span>
-          </a>
+          <Link href="/class" className={styles.ghostBtn}>
+            <span>Meet the Class</span>
+          </Link>
         </div>
       </div>
     </section>
