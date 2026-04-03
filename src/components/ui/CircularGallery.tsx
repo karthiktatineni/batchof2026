@@ -20,6 +20,7 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
   borderRadius = 12,
   textColor = '#ffffff',
 }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const rotation = useMotionValue(0);
   
   // Create 12 items for the cylinder
@@ -36,31 +37,54 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
     restDelta: 0.001,
   });
 
+  React.useEffect(() => {
+    const handleGlobalWheel = (e: WheelEvent) => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      // Check if the scroll happened inside our gallery box
+      const rect = container.getBoundingClientRect();
+      const isInside = (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      );
+
+      if (isInside) {
+        // Stop the page from scrolling
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+        e.stopPropagation();
+        
+        // Apply rotation
+        const current = rotation.get();
+        // Increased sensitivity for a more responsive feel
+        rotation.set(current + e.deltaY * 0.4 * scrollSpeed);
+      }
+    };
+
+    // Attach to window to guarantee we catch the event before it scrolls the page
+    window.addEventListener('wheel', handleGlobalWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', handleGlobalWheel);
+    };
+  }, [rotation, scrollSpeed]);
+
   const bind = useGesture(
     {
       onDrag: ({ delta: [dx] }) => {
         const current = rotation.get();
         rotation.set(current + dx * 0.4);
       },
-      onWheel: ({ event, delta: [, dy] }) => {
-        // Prevent background page from scrolling
-        if (event.cancelable) {
-          event.preventDefault();
-        }
-        event.stopPropagation();
-        
-        const current = rotation.get();
-        rotation.set(current + dy * 0.2 * scrollSpeed);
-      },
     },
     { 
       drag: { 
         filterTaps: true,
         from: () => [0, 0],
-      },
-      wheel: { 
-        eventOptions: { passive: false } 
-      } 
+      }
     }
   );
 
@@ -68,7 +92,7 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
   const radius = 450 + (bend * 20);
 
   return (
-    <div {...bind()} className={styles.wrapper}>
+    <div ref={containerRef} {...bind()} className={styles.wrapper}>
       <div className={styles.scene}>
         <motion.div 
           className={styles.cylinder}
