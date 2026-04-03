@@ -11,7 +11,7 @@ const timelineEvents = [
   { year: 'Year 1', date: 'Aug 2022', title: 'Orientation', desc: 'Faces we didn’t know, halls we got lost in.' },
   { year: 'Year 2', date: 'Oct 2023', title: 'The First Fest', desc: 'Decorations, music, and the first all-nighter for fun.' },
   { year: 'Year 3', date: 'Mar 2024', title: 'Internships & Panic', desc: 'Realizing adulting is difficult. But we had each other.' },
-  { year: 'Year 4', date: 'May 2025', title: 'Final Project', desc: 'The last submission. Relief mixed with an strange emptiness.' },
+  { year: 'Year 4', date: 'May 2026', title: 'Final Project', desc: 'The last submission. Relief mixed with an strange emptiness.' },
 ];
 
 export default function Timeline() {

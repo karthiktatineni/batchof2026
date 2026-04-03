@@ -23,7 +23,7 @@ const chapters = [
   {
     id: '03',
     title: 'Late Night Studies',
-    subtitle: 'Maggi, group projects, and realizing exams are tomorrow.',
+    subtitle: 'Midnight chats, group projects, and realizing exams are tomorrow.',
     image: 'https://picsum.photos/1000/600?random=13',
   },
 ];

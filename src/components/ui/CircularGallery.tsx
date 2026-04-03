@@ -1,140 +1,102 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { Renderer, Camera, Transform, Plane, Mesh, Program, Texture } from 'ogl';
+import React, { useRef, useMemo } from 'react';
+import { motion, useSpring, useMotionValue } from 'framer-motion';
+import styles from './CircularGallery.module.css';
 
 interface CircularGalleryProps {
   bend?: number;
-  textColor?: string;
-  borderRadius?: number;
   scrollSpeed?: number;
   scrollEase?: number;
+  borderRadius?: number;
+  textColor?: string;
 }
 
-export default function CircularGallery({
+const CircularGallery: React.FC<CircularGalleryProps> = ({ 
   bend = 3,
-  textColor = '#ffffff',
-  borderRadius = 0.05,
-  scrollSpeed = 2,
+  scrollSpeed = 1,
   scrollEase = 0.05,
-}: CircularGalleryProps) {
+  borderRadius = 12,
+  textColor = '#ffffff',
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const rotation = useMotionValue(0);
+  
+  // Create 12 items for the cylinder
+  const items = useMemo(() => Array.from({ length: 12 }).map((_, i) => ({
+    id: i,
+    src: `https://picsum.photos/600/800?random=${i + 800}`,
+    angle: (i / 12) * 360,
+  })), []);
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+  const smoothRotation = useSpring(rotation, { 
+    damping: 30, 
+    stiffness: 120,
+    mass: 0.5,
+    restDelta: 0.001,
+    // Note: scrollEase could be used here if we wanted to dynamically change spring settings
+  });
 
-    // Basic OGL Setup
-    const renderer = new Renderer({ alpha: true, dpr: 2 });
-    const gl = renderer.gl;
-    containerRef.current.appendChild(gl.canvas);
-    gl.clearColor(0, 0, 0, 0);
-
-    const camera = new Camera(gl, { fov: 45 });
-    camera.position.z = 5;
-
-    const scene = new Transform();
-
-    const resize = () => {
-      if (!containerRef.current) return;
-      renderer.setSize(containerRef.current.offsetWidth, containerRef.current.offsetHeight);
-      camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
+  React.useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (!containerRef.current?.contains(e.target as Node)) return;
+      
+      // Block page scroll
+      e.preventDefault();
+      
+      // Update motion value directly
+      const current = rotation.get();
+      rotation.set(current + e.deltaY * 0.2 * scrollSpeed);
     };
-    window.addEventListener('resize', resize, false);
-    resize();
 
-    // Shaders
-    const vertex = `
-      attribute vec3 position;
-      attribute vec2 uv;
-      uniform mat4 modelViewMatrix;
-      uniform mat4 projectionMatrix;
-      uniform float uBend;
-      varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        vec3 pos = position;
-        // Apply cylinder bend
-        float radius = 2.0 / uBend;
-        float angle = pos.x * uBend;
-        pos.x = sin(angle) * radius;
-        pos.z = cos(angle) * radius - radius;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-      }
-    `;
-
-    const fragment = `
-      precision highp float;
-      uniform vec3 uColor;
-      varying vec2 vUv;
-      void main() {
-        gl_FragColor = vec4(uColor * (0.8 + 0.2 * vUv.y), 1.0);
-      }
-    `;
-
-    // Geometry & Material (Increased size to 2x3)
-    const geometry = new Plane(gl, { width: 2.0, height: 3.0, widthSegments: 20 });
-    const program = new Program(gl, {
-      vertex,
-      fragment,
-      uniforms: {
-        uBend: { value: bend },
-        uColor: { value: [0.8, 0.6, 0.4] },
-      },
-      cullFace: null,
-    });
-
-    const items: Mesh[] = [];
-    const numItems = 12; // Increased from 8 to 12
-    for (let i = 0; i < numItems; i++) {
-        const mesh = new Mesh(gl, { geometry, program });
-        mesh.setParent(scene);
-        items.push(mesh);
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('wheel', handleWheel, { passive: false });
     }
 
-    let scrollTarget = 0;
-    let scrollCurrent = 0;
-
-    const onWheel = (e: WheelEvent) => {
-      // Prevent browser default scroll if the gallery is in focus
-      e.preventDefault();
-      scrollTarget += e.deltaY * 0.001 * scrollSpeed;
-    };
-    
-    // Set passive: false to allow e.preventDefault()
-    containerRef.current.addEventListener('wheel', onWheel, { passive: false });
-
-    let requestID: number;
-    const update = () => {
-      requestID = requestAnimationFrame(update);
-      
-      scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
-      
-      items.forEach((mesh, i) => {
-        const angle = (i / numItems) * Math.PI * 2 + scrollCurrent;
-        const radius = 4.5; // Increased cylinder radius
-        mesh.position.x = Math.sin(angle) * radius;
-        mesh.position.z = Math.cos(angle) * radius - 3.5; // Adjusted offset for better visibility
-        mesh.rotation.y = angle;
-      });
-
-      renderer.render({ scene, camera });
-    };
-    requestID = requestAnimationFrame(update);
-
     return () => {
-      window.removeEventListener('resize', resize);
-      if (containerRef.current?.contains(gl.canvas)) {
-        containerRef.current.removeChild(gl.canvas);
+      if (container) {
+        container.removeEventListener('wheel', handleWheel);
       }
-      containerRef.current?.removeEventListener('wheel', onWheel);
-      cancelAnimationFrame(requestID);
     };
-  }, [bend, scrollSpeed, scrollEase]);
+  }, [scrollSpeed, rotation]);
+
+  // Adjust radius based on bend - higher bend means tighter circle (further away)
+  const radius = 450 + (bend * 20);
 
   return (
-    <div 
-      ref={containerRef} 
-      style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }} 
-    />
+    <div ref={containerRef} className={styles.wrapper}>
+      <div className={styles.scene}>
+        <motion.div 
+          className={styles.cylinder}
+          style={{ rotateY: smoothRotation }}
+        >
+          {items.map((item) => (
+            <div 
+              key={item.id}
+              className={styles.item}
+              style={{
+                transform: `rotateY(${item.angle}deg) translateZ(${radius}px)`,
+                borderRadius: typeof borderRadius === 'number' && borderRadius < 1 ? `${borderRadius * 100}%` : `${borderRadius}px`,
+                color: textColor,
+              }}
+            >
+              <img 
+                src={item.src} 
+                alt={`Memory ${item.id}`} 
+                className={styles.image}
+                loading="lazy"
+              />
+              <div 
+                className={styles.overlay} 
+                style={{ background: `linear-gradient(to bottom, transparent 60%, ${textColor}33)` }} 
+              />
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </div>
   );
-}
+};
+
+export default CircularGallery;

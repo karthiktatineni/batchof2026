@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const quotes = [
   { text: "We didn't realize we were making memories, we just knew we were having fun.", author: "Anonymous" },
-  { text: "The days were long, but the years were short.", author: "Batch of '25" }
+  { text: "The days were long, but the years were short.", author: "Batch of '26" }
 ];
 
 export default function QuotesSection() {
