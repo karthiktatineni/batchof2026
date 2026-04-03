@@ -2,6 +2,10 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
+import { auth } from '@/lib/firebase';
+import { signOut } from 'firebase/auth';
 import styles from './Navigation.module.css';
 
 const navLinks = [
@@ -16,6 +20,17 @@ const navLinks = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.push('/auth/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,18 +60,45 @@ export default function Navigation() {
               </Link>
             </li>
           ))}
+          {user && (
+            <li className={styles.mobileOnly}>
+              <button 
+                onClick={handleLogout} 
+                className={styles.logoutBtnMobile}
+              >
+                Log Out
+              </button>
+            </li>
+          )}
         </ul>
 
-        <button
-          className={`${styles.burger} ${menuOpen ? styles.burgerOpen : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className={styles.actions}>
+          {user && (
+            <div className={styles.userBadge}>
+              <span className={styles.roll}>{user.displayName || user.email?.split('@')[0]}</span>
+            </div>
+          )}
+
+          {user && (
+            <button 
+              onClick={handleLogout} 
+              className={styles.logoutBtnDesktop}
+            >
+              Exit Archive
+            </button>
+          )}
+
+          <button
+            className={`${styles.burger} ${menuOpen ? styles.burgerOpen : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </div>
     </nav>
   );

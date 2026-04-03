@@ -26,6 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .logo {
@@ -54,6 +55,10 @@
   list-style: none;
   gap: 2rem;
   align-items: center;
+  /* Shift to center */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .link {
@@ -138,6 +143,10 @@
     pointer-events: none;
     transform: translateY(-10px);
     transition: all var(--duration-normal) var(--ease-smooth);
+    /* Reset centering on mobile */
+    position: fixed;
+    left: 0;
+    transform: none;
   }
 
   .linksOpen {
@@ -148,5 +157,81 @@
 
   .link {
     font-size: 1rem;
+  }
+
+  .mobileOnly {
+    display: block !important;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .logoutBtnMobile {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 71, 87, 0.1);
+    color: #ff4757;
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+}
+
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.roll {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent-warm);
+  letter-spacing: 0.05em;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logoutBtnDesktop {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.logoutBtnDesktop:hover {
+  background: rgba(255, 71, 87, 0.1);
+  color: #ff4757;
+  border-color: rgba(255, 71, 87, 0.2);
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .userBadge {
+    margin-right: 1rem;
+  }
+  
+  .logoutBtnDesktop {
+    display: none;
   }
 }
