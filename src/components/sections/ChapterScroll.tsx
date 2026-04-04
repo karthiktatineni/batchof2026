@@ -10,20 +10,20 @@ gsap.registerPlugin(ScrollTrigger);
 const chapters = [
   {
     id: '01',
-    title: 'The First Day',
-    subtitle: 'Nervous energy, lost in the corridors, and the first "Hi".',
+    title: 'A Hello That Felt Like Home',
+    subtitle: 'We walked in as strangers, unaware that we were about to find our lifelong tribe.',
     image: '/td2/IMG_7720.jpg',
   },
   {
     id: '02',
     title: 'The Fests',
-    subtitle: 'Vibrant colors, sleepless event planning, and stage lights.',
+    subtitle: 'Between the Vibrant colors, noise and lights we found pieces of ourselves.',
     image: '/td1/IMG_0273.JPG',
   },
   {
     id: '03',
-    title: 'Late Night Studies',
-    subtitle: 'Midnight chats, group projects, and realizing exams are tomorrow.',
+    title: 'More Than Just a Goodbye',
+    subtitle: "It's not just the end of a semester; it's the beginning of missing you all every single day.",
     image: '/td2/IMG_7072.JPG',
   },
 ];
