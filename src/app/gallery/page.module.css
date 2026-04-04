@@ -51,6 +51,26 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filterCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 1px 7px;
+  font-size: 0.65rem;
+  font-family: var(--font-accent);
+  min-width: 24px;
+  letter-spacing: 0;
+}
+
+.activeBtn .filterCount {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .filterBtn:hover {
@@ -99,6 +119,12 @@
   }
 }
 
+/*
+  CACHING STRATEGY: All images always stay in the DOM.
+  itemHidden uses display:none to remove from layout (column flow).
+  itemVisible fades in smoothly.
+  Browser keeps decoded images in memory — switching filters is instant.
+*/
 .item {
   break-inside: avoid;
   margin-bottom: var(--space-md);
@@ -107,8 +133,28 @@
   overflow: hidden;
   cursor: zoom-in;
   background-color: var(--color-bg-card);
-  transition: transform 0.6s cubic-bezier(0.2, 1, 0.2, 1), box-shadow 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.2, 1, 0.2, 1), box-shadow 0.6s ease, opacity 0.3s ease;
   border: 1px solid rgba(218, 165, 32, 0.05);
+}
+
+/* Visible state: full opacity, participates in layout */
+.itemVisible {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  animation: fadeIn 0.35s ease forwards;
+}
+
+/* Hidden state: removed from layout flow entirely */
+.itemHidden {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .item:hover {
@@ -148,7 +194,58 @@
   filter: brightness(1.1) contrast(1.05); /* "Pops" to life on hover while staying clear */
 }
 
-/* Info styles removed as per request */
+/* Item overlay with year badge */
+.itemOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-sm) var(--space-md);
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.item:hover .itemOverlay {
+  opacity: 1;
+}
+
+.itemYear {
+  font-family: var(--font-accent);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-accent-gold);
+}
+
+/* Load More */
+.loadMoreWrap {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-2xl) 0;
+}
+
+.loadMoreBtn {
+  background: transparent;
+  border: 1px solid rgba(218, 165, 32, 0.4);
+  color: var(--color-accent-gold);
+  padding: var(--space-sm) var(--space-xl);
+  border-radius: 100px;
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loadMoreBtn:hover {
+  background: rgba(218, 165, 32, 0.1);
+  border-color: var(--color-accent-gold);
+  transform: translateY(-2px);
+}
 
 /* Lightbox */
 .lightbox {
@@ -240,7 +337,7 @@
 
 
 .closeBtn {
-  position: absolute;
+  position: fixed;
   top: var(--space-lg);
   right: var(--space-lg);
   background: rgba(255, 255, 255, 0.1);
@@ -254,10 +351,46 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 2001;
+  z-index: 2010;
 }
 
 .closeBtn:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: rotate(90deg);
+}
+
+/* Lightbox Navigation Arrows */
+.navBtn {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 1;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 2010;
+  padding-bottom: 4px;
+}
+
+.navBtn:hover {
+  background: rgba(218, 165, 32, 0.15);
+  border-color: var(--color-accent-gold);
+  color: var(--color-accent-gold);
+}
+
+.navPrev {
+  left: var(--space-lg);
+}
+
+.navNext {
+  right: var(--space-lg);
 }
