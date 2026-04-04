@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-xl);
+  gap: var(--space-md);
 }
 
 .header {
@@ -26,15 +26,12 @@
   color: var(--color-text-primary);
 }
 
-.tabs {
-  display: flex;
-  gap: 1rem;
+.actions {
   margin-top: var(--space-md);
-  background: var(--color-bg-deep);
-  padding: 6px;
-  border-radius: 50px;
-  border: 1px solid var(--color-border);
+  display: flex;
+  justify-content: center;
 }
+/* Removed tabs and footer as they are no longer used */
 
 .tab {
   padding: 8px 20px;
@@ -57,9 +54,11 @@
 }
 
 .galleryWrapper {
-  width: 100%;
-  height: 80vh;
-  min-height: 600px;
+  width: 90%;
+  max-width: 1000px;
+  margin: var(--space-sm) auto 0;
+  height: 65vh;
+  min-height: 450px;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   position: relative;
@@ -93,3 +92,43 @@
   z-index: 10;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.fullGalleryBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-accent-gold);
+  color: var(--color-accent-gold);
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+  text-decoration: none;
+}
+
+.fullGalleryBtn:hover {
+  background: var(--color-accent-gold);
+  color: var(--color-bg-deep);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(218, 165, 32, 0.2);
+}
+
+.btnIcon {
+  font-size: 1.2rem;
+  transition: transform 0.4s ease;
+}
+
+.fullGalleryBtn:hover .btnIcon {
+  transform: translateX(4px);
+}
+

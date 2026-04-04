@@ -11,8 +11,10 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   const { user, loading } = useAuth();
   
   const isAuthPage = pathname.startsWith('/auth');
+  const isAdminPage = pathname === '/admin';
 
-  if (loading && !isAuthPage) {
+  // Prevent flash of protected content while loading or redirecting
+  if (!isAuthPage && !isAdminPage && (loading || !user)) {
     return (
       <div className={styles.loader}>
         <div className={styles.spinner} />

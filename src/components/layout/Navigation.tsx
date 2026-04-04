@@ -11,7 +11,7 @@ import styles from './Navigation.module.css';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Journey', href: '/#chapters' },
-  { label: 'Memories', href: '/#gallery' },
+  { label: 'Gallery', href: '/gallery' },
   { label: 'Timeline', href: '/#timeline' },
   { label: 'Wall', href: '/#messages' },
   { label: 'Meet the Class', href: '/class' },

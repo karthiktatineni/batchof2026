@@ -67,13 +67,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-  filter: grayscale(100%) contrast(1.1);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+  filter: brightness(0.9); /* Natural color, slightly dimmed for depth */
 }
 
 .card:hover .imageContainer {
-  transform: scale(1.05); /* Slight zooom */
-  filter: grayscale(0%) contrast(1); /* Reveal color */
+  transform: scale(1.05); /* Slight zoom */
+  filter: brightness(1.1) contrast(1.05); /* Vibrant focus */
 }
 
 /* Base image styling if not using Next/Image or alongside it */
@@ -122,7 +122,7 @@
 .separator {
   width: 30px;
   height: 1px;
-  background-color: var(--color-accent-gold);
+  background-color: #bdc3c7;
   margin-bottom: var(--space-sm);
   opacity: 0.5;
 }
@@ -146,6 +146,6 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-accent-gold);
+  color: #bdc3c7;
   opacity: 0.8;
 }
