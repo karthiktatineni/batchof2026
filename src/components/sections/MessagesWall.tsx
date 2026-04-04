@@ -14,7 +14,7 @@ const messages = [
   { id: 4, text: "The lectures were long, but the years flew by. I'll miss our designated bench in the quad.", author: "Neha P." },
   { id: 5, text: "To all the professors who tolerated our excuses: we're finally leaving!", author: "Rahul T." },
   { id: 6, text: "Remember when we thought passing the first semester was impossible? Look at us now.", author: "Anjali D." },
-  { id: 7, text: "The proxy attendances, the terrible jokes, the unbreakable bonds. I'll cherish it all.", author: "Karthik" },
+  { id: 7, text: "The proxy attendances, the terrible jokes, the unbreakable bonds.", author: "Karthik" },
   { id: 8, text: "Thanks for always sharing your notes the night before the finals. You know who you are.", author: "Nitish" },
   { id: 9, text: "I'll never forget the adrenaline of submitting assignments at 11:59 PM.", author: "Pooja M." },
   { id: 10, text: "From freshers' party to farewell, we've come a long way. Best of luck, batchmates!", author: "Siddharth V." },
@@ -41,7 +41,7 @@ export default function MessagesWall() {
             {[...messages, ...messages].map((message, i) => {
               const yOffset = i % 3 === 0 ? '-40px' : i % 3 === 1 ? '40px' : '0px';
               const rotate = i % 2 === 0 ? '-4deg' : '4deg';
-              
+
               return (
                 <div
                   key={`msg-${i}`}

@@ -52,7 +52,15 @@ export default function DomeGallery({
   });
 
   const generateImages = () => {
-    const total = 24; // More images for a fuller look
+    const total = 24;
+    const pool = [
+      '/td1/IMG_0236.JPG', '/td1/IMG_0273.JPG', '/td1/IMG_0358.JPG', '/td1/IMG_0440.JPG', '/td1/IMG_0485.JPG', '/td1/IMG_E0044.JPG',
+      '/td3/IMG20250415114235.jpg', '/td3/IMG20250415120108.jpg', '/td3/IMG20250415120412.jpg', '/td3/IMG20250415120705.jpg',
+      '/td3/IMG20250415123112.jpg', '/td3/IMG20250415124255.jpg', '/td3/IMG20250415124257.jpg', '/td3/IMG20250415124815.jpg',
+      '/td3/IMG20250415125707.jpg', '/td3/IMG20250415130055.jpg', '/td3/IMG20250415141656.jpg', '/td3/IMG20250415144357.jpg',
+      '/td3/IMG20250415150222.jpg', '/td3/IMG20250415150300.jpg', '/td3/IMG20250415160503.jpg', '/td3/IMG20250416191619.jpg'
+    ];
+
     return Array.from({ length: total }).map((_, i) => {
       const angle = (i / total) * Math.PI * 2;
       const radius = minRadius;
@@ -60,9 +68,8 @@ export default function DomeGallery({
       const z = Math.cos(angle) * radius;
       const rotateY = angle * (180 / Math.PI);
       
-      // Jumbled vertical position: alternating rows with slight jitter
-      // This creates the "up and down jumbled" effect you requested
       const verticalVariation = (i % 3 - 1) * 280 + (Math.sin(i) * 60);
+      const imgSrc = pool[i % pool.length];
 
       return (
         <div
@@ -80,7 +87,7 @@ export default function DomeGallery({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
-            src={`https://picsum.photos/300/400?random=${i}&grayscale=${grayscale ? 1 : 0}`} 
+            src={imgSrc} 
             alt={`Gallery image ${i}`}
             draggable={false}
             style={{
@@ -91,7 +98,7 @@ export default function DomeGallery({
               border: '2px solid rgba(255,255,255,0.1)',
               userSelect: 'none',
               pointerEvents: 'none',
-              filter: 'brightness(0.8)',
+              filter: grayscale ? 'brightness(0.8) grayscale(1)' : 'brightness(0.8)',
             }}
           />
         </div>

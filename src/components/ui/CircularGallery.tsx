@@ -23,12 +23,27 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const rotation = useMotionValue(0);
   
-  // Create 12 items for the cylinder
-  const items = useMemo(() => Array.from({ length: 12 }).map((_, i) => ({
-    id: i,
-    src: `https://picsum.photos/600/800?random=${i + 800}`,
-    angle: (i / 12) * 360,
-  })), []);
+  const items = useMemo(() => {
+    const images = [
+      '/td3/IMG20250415124257.jpg',
+      '/td3/IMG20250415124815.jpg',
+      '/td3/IMG20250415125707.jpg',
+      '/td3/IMG20250415130055.jpg',
+      '/td3/IMG20250415141656.jpg',
+      '/td3/IMG20250415144357.jpg',
+      '/td1/IMG_0440.JPG',
+      '/td1/IMG_E0044.JPG',
+      '/td3/IMG20250415160503.jpg',
+      '/td3/IMG20250416191619.jpg',
+      '/td1/IMG_0236.JPG',
+      '/td1/IMG_0273.JPG',
+    ];
+    return images.map((src, i) => ({
+      id: i,
+      src,
+      angle: (i / 12) * 360,
+    }));
+  }, []);
 
   const smoothRotation = useSpring(rotation, { 
     damping: 30, 

@@ -12,19 +12,19 @@ const chapters = [
     id: '01',
     title: 'The First Day',
     subtitle: 'Nervous energy, lost in the corridors, and the first "Hi".',
-    image: 'https://picsum.photos/1000/600?random=11',
+    image: '/td2/IMG_7720.jpg',
   },
   {
     id: '02',
     title: 'The Fests',
     subtitle: 'Vibrant colors, sleepless event planning, and stage lights.',
-    image: 'https://picsum.photos/1000/600?random=12',
+    image: '/td1/IMG_0273.JPG',
   },
   {
     id: '03',
     title: 'Late Night Studies',
     subtitle: 'Midnight chats, group projects, and realizing exams are tomorrow.',
-    image: 'https://picsum.photos/1000/600?random=13',
+    image: '/td2/IMG_7072.JPG',
   },
 ];
 
@@ -33,41 +33,46 @@ export default function ChapterScroll() {
   const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    const panels = panelsRef.current;
+    const scrollContainer = containerRef.current?.querySelector(`.${styles.scrollContainer}`);
+    if (!containerRef.current || !scrollContainer) return;
 
-    // Horizontal scroll pinning
-    gsap.to(panels, {
-      xPercent: -100 * (panels.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        pin: true,
-        scrub: 1,
-        snap: 1 / (panels.length - 1),
-        end: () => "+=" + containerRef.current!.offsetWidth * panels.length
-      }
-    });
+    const panels = gsap.utils.toArray(`.${styles.panel}`);
 
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === containerRef.current) t.kill();
+    const ctx = gsap.context(() => {
+      gsap.to(scrollContainer, {
+        x: () => -(scrollContainer.scrollWidth - window.innerWidth),
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          pin: true,
+          scrub: 1,
+          snap: 1 / (chapters.length - 1),
+          // Base the duration on the amount of horizontal scroll
+          end: () => "+=" + (scrollContainer.scrollWidth - window.innerWidth),
+          invalidateOnRefresh: true,
+        }
       });
-    };
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <section className={`section ${styles.section}`} id="chapters" ref={containerRef}>
       <div className={styles.scrollContainer}>
-        {chapters.map((chapter, i) => (
-          <div 
-            key={chapter.id} 
+        {chapters.map((chapter) => (
+          <div
+            key={chapter.id}
             className={styles.panel}
-            ref={(el) => { panelsRef.current[i] = el; }}
           >
             <div className={styles.imageWrapper}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={chapter.image} alt={chapter.title} className={styles.image} loading="lazy" />
+              <img
+                src={chapter.image}
+                alt={chapter.title}
+                className={styles.image}
+                loading="lazy"
+              />
               <div className={styles.overlay} />
             </div>
             <div className={styles.content}>

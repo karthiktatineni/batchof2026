@@ -18,21 +18,21 @@ export default function FarewellSection() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: 'top 60%',
-        end: 'bottom center',
-        scrub: 1,
+        start: 'top 85%',
+        end: 'bottom bottom',
+        scrub: 0.3, // much faster follow
       }
     });
 
     tl.fromTo(
       headlineRef.current,
-      { y: 100, opacity: 0, scale: 0.9 },
-      { y: 0, opacity: 1, scale: 1, duration: 1.5, ease: 'power2.out' }
+      { y: 80, opacity: 0, scale: 0.95 },
+      { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' }
     ).fromTo(
       letterRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 },
-      '-=1'
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6 },
+      '-=0.4'
     );
 
     return () => {

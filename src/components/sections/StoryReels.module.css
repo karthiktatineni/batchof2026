@@ -137,24 +137,90 @@
   object-fit: cover;
 }
 
-.progressBar {
+.storyHeader {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  right: 60px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
+  top: 0; left: 0; right: 0;
+  padding: 20px 16px;
+  z-index: 20;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+}
+
+.progressBarWrapper {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.progressContainer {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
   overflow: hidden;
 }
 
-.progressFill {
+.progressFillStatic {
   height: 100%;
-  background: white;
-  width: 0%;
-  animation: progressFill 5s linear forwards;
+  transition: background-color 0.3s ease;
 }
 
-@keyframes progressFill {
-  to { width: 100%; }
+.storyMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.storyTitle {
+  font-family: var(--font-accent);
+  font-size: var(--text-label);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+.imageNavWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.navZone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  z-index: 15;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navZone:first-child {
+  left: 0;
+}
+
+.navZone:nth-child(2) {
+  right: 0;
+  width: 60%;
+}
+
+.modalFooter {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 16px;
+  text-align: center;
+  font-family: var(--font-accent);
+  font-size: var(--text-label);
+  color: rgba(255,255,255,0.6);
+  z-index: 20;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    max-width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
 }
