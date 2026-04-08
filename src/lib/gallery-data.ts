@@ -827,12 +827,12 @@ export const galleryImages: GalleryImage[] = [
     "category": "2nd Year",
     "title": "Murali Krishna"
   },
-  {
-    "id": "y2_133",
-    "src": "/Second  year photos or any td pics in specified years (File responses)/IMG-20240704-WA0011 - M Likith Mahendra(1).jpg",
-    "category": "2nd Year",
-    "title": "M Likith Mahendra"
-  },
+  /* {
+     "id": "y2_133",
+     "src": "/Second  year photos or any td pics in specified years (File responses)/IMG-20240704-WA0011 - M Likith Mahendra(1).jpg",
+     "category": "2nd Year",
+     "title": "M Likith Mahendra"
+   },*/
   {
     "id": "y2_134",
     "src": "/Second  year photos or any td pics in specified years (File responses)/IMG-20241213-WA0218 - Hemasri Podakanti(1).jpg",
@@ -1589,12 +1589,12 @@ export const galleryImages: GalleryImage[] = [
     "category": "3rd Year",
     "title": "M Likith Mahendra"
   },
-  {
+  /*{
     "id": "y3_260",
     "src": "/Third year photos or any td pics in specified years (File responses)/IMG_2045_Original - Kondakala Priyanka.jpg",
     "category": "3rd Year",
     "title": "Kondakala Priyanka"
-  },
+  },*/
   {
     "id": "y3_261",
     "src": "/Third year photos or any td pics in specified years (File responses)/IMG_2297 - Kondakala Priyanka.JPG",
@@ -1667,7 +1667,7 @@ export const galleryImages: GalleryImage[] = [
     "category": "3rd Year",
     "title": "Kondakala Priyanka"
   },
-  {
+  /*{
     "id": "y3_273",
     "src": "/Third year photos or any td pics in specified years (File responses)/IMG_5457 - Kondakala Priyanka.JPG",
     "category": "3rd Year",
@@ -1678,19 +1678,19 @@ export const galleryImages: GalleryImage[] = [
     "src": "/Third year photos or any td pics in specified years (File responses)/IMG_5459 - Kondakala Priyanka.JPG",
     "category": "3rd Year",
     "title": "Kondakala Priyanka"
-  },
+  },*/
   {
     "id": "y3_275",
     "src": "/Third year photos or any td pics in specified years (File responses)/IMG_5461 - Kondakala Priyanka.JPG",
     "category": "3rd Year",
     "title": "Kondakala Priyanka"
   },
-  {
+  /*{
     "id": "y3_276",
     "src": "/Third year photos or any td pics in specified years (File responses)/IMG_5462 - Kondakala Priyanka.JPG",
     "category": "3rd Year",
     "title": "Kondakala Priyanka"
-  },
+  },*/
   {
     "id": "y3_277",
     "src": "/Third year photos or any td pics in specified years (File responses)/IMG_7143 - Kanth Balla.JPG",

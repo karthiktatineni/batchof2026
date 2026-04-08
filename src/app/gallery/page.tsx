@@ -45,6 +45,7 @@ export default function GalleryPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
   // Keyboard navigation for lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
