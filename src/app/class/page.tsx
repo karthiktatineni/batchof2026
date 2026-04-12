@@ -25,7 +25,7 @@ const students = [
   { id: 20, name: 'YAGNASRI MADHAV', role: '22951A0484', image: 'https://ui-avatars.com/api/?name=Madhav&background=1e1e1e&color=bdc3c7&size=512' },
   { id: 21, name: 'KANCHARLA MAHESH', role: '22951A0485', image: '/profile%20photos/IMG20250415135734%20-%20Kancharla%20Mahesh.jpg' },
   { id: 22, name: 'M MAHESHWARI', role: '22951A0486', image: 'https://ui-avatars.com/api/?name=Maheshwari&background=1e1e1e&color=bdc3c7&size=512' },
-  { id: 23, name: 'PENKEY MAHITHA', role: '22951A0487', image: '/profile%20photos/IMG-20260402-WA0002%20-%20Mahitha%20Penkey.jpg' },
+  { id: 23, name: 'PENKEY MAHITHA', role: '22951A0487', image: '/profile%20photos/IMG-20260402-WA0002%20-%20Mahitha%20Penkey.jpeg' },
   { id: 24, name: 'MALLAM USHA', role: '22951A0488', image: 'https://ui-avatars.com/api/?name=Usha&background=1e1e1e&color=bdc3c7&size=512' },
   { id: 25, name: 'BYAGARI MANASA', role: '22951A0489', image: 'https://ui-avatars.com/api/?name=Manasa&background=1e1e1e&color=bdc3c7&size=512' },
   { id: 26, name: 'MADDELA MANI SAKETH', role: '22951A0490', image: 'https://ui-avatars.com/api/?name=Mani+Saketh&background=1e1e1e&color=bdc3c7&size=512' },
