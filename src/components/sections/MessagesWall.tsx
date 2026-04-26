@@ -1,11 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import styles from './MessagesWall.module.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const messages = [
   { id: 1, text: "My experience in our college has been truly memorable and meaningful. It was not just a place for studying, but a place where I grew as a person. From the very first day, I got the chance to meet new people who slowly became my close friends. Together, we shared so many moments.", author: "Mudili Jahnavi" },
@@ -47,6 +44,16 @@ const messages = [
 ];
 
 export default function MessagesWall() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <section className={`section ${styles.section}`} id="messages">
       <div className={`container ${styles.container}`}>
@@ -56,24 +63,32 @@ export default function MessagesWall() {
           <p className="reveal">Scribbles from the heart, digitized for eternity.</p>
         </div>
 
-        <div className={styles.marqueeContainer}>
-          <div className={styles.marqueeTrack}>
-            {[...messages, ...messages].map((message, i) => {
-              const yOffset = i % 3 === 0 ? '-40px' : i % 3 === 1 ? '40px' : '0px';
-              const rotate = i % 2 === 0 ? '-4deg' : '4deg';
+        <div className={styles.scrollWrapper}>
+          <div className={styles.scrollHint}>← Swipe or scroll to read →</div>
+          
+          <div className={styles.scrollContainer} ref={containerRef}>
+            <div className={styles.scrollTrack}>
+              {messages.map((message, i) => {
+                const yOffset = i % 3 === 0 ? '-20px' : i % 3 === 1 ? '20px' : '0px';
+                const rotate = i % 2 === 0 ? '-2deg' : '2deg';
 
-              return (
-                <div
-                  key={`msg-${i}`}
-                  className={styles.messageCard}
-                  style={{ transform: `translateY(${yOffset}) rotate(${rotate})` }}
-                >
-                  <div className={styles.quoteMark}>"</div>
-                  <p className={styles.text}>{message.text}</p>
-                  <p className={styles.author}>— {message.author}</p>
-                </div>
-              );
-            })}
+                return (
+                  <motion.div
+                    key={`msg-${message.id}`}
+                    className={styles.messageCard}
+                    whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }}
+                    style={{ 
+                      y: isMobile ? 0 : yOffset, 
+                      rotate: isMobile ? 0 : rotate 
+                    }}
+                  >
+                    <div className={styles.quoteMark}>"</div>
+                    <p className={styles.text}>{message.text}</p>
+                    <p className={styles.author}>— {message.author}</p>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 .section {
   background-color: var(--color-bg-surface);
   border-top: 1px solid var(--color-border);
+  overflow: hidden;
 }
 
 .container {
@@ -23,31 +24,53 @@
   color: var(--color-text-primary);
 }
 
-.marqueeContainer {
-  overflow: hidden;
+.scrollWrapper {
   width: 100vw;
   margin-left: calc(-50vw + 50%); /* full bleed */
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
   margin-bottom: var(--space-xl);
-  padding: 60px 0; /* Buffer for staggered Y offset */
 }
 
-.marqueeTrack {
+.scrollHint {
+  font-family: var(--font-accent);
+  font-size: var(--text-label);
+  color: var(--color-accent-gold);
+  opacity: 0.6;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scrollContainer {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 60px 0; /* Buffer for staggered Y offset */
+  cursor: grab;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.scrollContainer:active {
+  cursor: grabbing;
+}
+
+.scrollTrack {
   display: flex;
   gap: var(--space-md);
-  padding: 0 var(--space-md);
+  padding: 0 var(--space-2xl);
   width: max-content;
-  animation: marquee 150s linear infinite;
   align-items: center;
-}
-
-.marqueeTrack:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - (var(--space-md) / 2))); }
 }
 
 .messageCard {
@@ -58,12 +81,10 @@
   border-radius: var(--border-radius-lg);
   padding: var(--space-xl) var(--space-md);
   position: relative;
-  transition: transform var(--duration-normal) var(--ease-smooth), border-color var(--duration-normal) var(--ease-smooth), box-shadow var(--duration-normal) var(--ease-smooth);
+  transition: border-color var(--duration-normal) var(--ease-smooth), box-shadow var(--duration-normal) var(--ease-smooth), background var(--duration-normal) var(--ease-smooth);
 }
 
 .messageCard:hover {
-  transform: scale(1.05) rotate(0deg) !important;
-  z-index: 10;
   border-color: var(--color-accent-warm);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   background: var(--color-bg-card);
@@ -100,7 +121,19 @@
 }
 
 @media (max-width: 768px) {
+  .scrollContainer {
+    padding: 20px 0;
+  }
+  
+  .scrollTrack {
+    padding: 0 var(--space-md);
+  }
+
   .messageCard {
     width: 280px;
+  }
+  
+  .scrollHint {
+    font-size: 0.7rem;
   }
 }
