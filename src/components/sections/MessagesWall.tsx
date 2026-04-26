@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styles from './MessagesWall.module.css';
 
 const messages = [
@@ -45,13 +45,37 @@ const messages = [
 
 export default function MessagesWall() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const updateDimensions = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (trackRef.current && containerRef.current) {
+        // Use max to ensure width is never negative
+        setWidth(Math.max(0, trackRef.current.scrollWidth - containerRef.current.offsetWidth));
+      }
+    };
+
+    // Initial calculation
+    updateDimensions();
+
+    // Use ResizeObserver for more reliable updates
+    const resizeObserver = new ResizeObserver(() => {
+      updateDimensions();
+    });
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    window.addEventListener('resize', updateDimensions);
+    
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+      resizeObserver.disconnect();
+    };
   }, []);
 
   return (
@@ -64,10 +88,16 @@ export default function MessagesWall() {
         </div>
 
         <div className={styles.scrollWrapper}>
-          <div className={styles.scrollHint}>← Swipe or scroll to read →</div>
+          <div className={styles.scrollHint}>← Drag or swipe to read →</div>
           
           <div className={styles.scrollContainer} ref={containerRef}>
-            <div className={styles.scrollTrack}>
+            <motion.div 
+              ref={trackRef}
+              drag="x"
+              dragConstraints={{ right: 0, left: -width }}
+              whileTap={{ cursor: 'grabbing' }}
+              className={styles.scrollTrack}
+            >
               {messages.map((message, i) => {
                 const yOffset = i % 3 === 0 ? '-20px' : i % 3 === 1 ? '20px' : '0px';
                 const rotate = i % 2 === 0 ? '-2deg' : '2deg';
@@ -76,7 +106,7 @@ export default function MessagesWall() {
                   <motion.div
                     key={`msg-${message.id}`}
                     className={styles.messageCard}
-                    whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }}
+                    whileHover={!isMobile ? { scale: 1.05, rotate: 0, zIndex: 10 } : {}}
                     style={{ 
                       y: isMobile ? 0 : yOffset, 
                       rotate: isMobile ? 0 : rotate 
@@ -88,7 +118,7 @@ export default function MessagesWall() {
                   </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
