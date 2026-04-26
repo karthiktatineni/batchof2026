@@ -3,16 +3,17 @@
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, db } from '@/lib/firebase';
-import { rollToEmail, isValidStudent } from '@/lib/auth-utils';
-import { doc, setDoc } from 'firebase/firestore';
+import { isValidStudent, getStudentName } from '@/lib/auth-utils';
+import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Mail, Hash } from 'lucide-react';
 import styles from '../login/page.module.css';
 
 export default function SignUp() {
   const [rollNumber, setRollNumber] = useState('');
+  const [personalEmail, setPersonalEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -23,7 +24,7 @@ export default function SignUp() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!rollNumber || !password || !confirmPassword) return;
+    if (!rollNumber || !personalEmail || !password || !confirmPassword) return;
     
     if (password !== confirmPassword) {
       setError('Passwords do not match');
@@ -34,32 +35,58 @@ export default function SignUp() {
       setError('Password should be at least 6 characters');
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(personalEmail.trim())) {
+      setError('Please enter a valid email address');
+      return;
+    }
     
     setError('');
     setLoading(true);
     
     try {
-      // Step 1: Verify roll number
+      // Step 1: Verify roll number is in the class list
       if (!isValidStudent(rollNumber)) {
-        throw new Error('This roll number is not recognized as a student in this class. Access denied.');
+        throw new Error('This roll number is not recognized. Access denied.');
+      }
+
+      // Step 2: Check if this roll number is already registered in Firestore
+      const usersRef = collection(db, 'users');
+      const rollQuery = query(usersRef, where('rollNumber', '==', rollNumber.trim().toUpperCase()));
+      const rollSnap = await getDocs(rollQuery);
+      if (!rollSnap.empty) {
+        throw new Error('This roll number is already registered. Please login instead.');
+      }
+
+      // Step 3: Check if this email is already used by another student
+      const emailQuery = query(usersRef, where('personalEmail', '==', personalEmail.trim().toLowerCase()));
+      const emailSnap = await getDocs(emailQuery);
+      if (!emailSnap.empty) {
+        throw new Error('This email is already associated with another account.');
       }
       
-      // Step 2: Map to email format
-      const email = rollToEmail(rollNumber);
+      // Step 4: Get the student's name from the class list
+      const studentName = getStudentName(rollNumber) || rollNumber.toUpperCase();
       
-      // Step 3: Create Firebase Auth User
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // Step 5: Create Firebase Auth User with the REAL personal email
+      const userCredential = await createUserWithEmailAndPassword(
+        auth, 
+        personalEmail.trim().toLowerCase(), 
+        password
+      );
       const user = userCredential.user;
       
-      // Step 4: Update display name with roll number
+      // Step 6: Update display name
       await updateProfile(user, {
-        displayName: rollNumber.toUpperCase()
+        displayName: studentName
       });
 
-      // Step 5: Save record in Firestore
+      // Step 7: Save the roll ↔ email mapping in Firestore
       await setDoc(doc(db, 'users', user.uid), {
         rollNumber: rollNumber.toUpperCase(),
-        email: email,
+        personalEmail: personalEmail.trim().toLowerCase(),
+        name: studentName,
         createdAt: new Date().toISOString()
       });
       
@@ -67,7 +94,7 @@ export default function SignUp() {
     } catch (err: any) {
       console.error(err);
       if (err.code === 'auth/email-already-in-use') {
-        setError('This roll number is already registered. Please login.');
+        setError('This email is already registered. Please login or use a different email.');
       } else {
         setError(err.message || 'Registration failed. Please try again.');
       }
@@ -83,7 +110,7 @@ export default function SignUp() {
       <motion.div 
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={styles.card}
       >
         <div className={styles.header}>
@@ -95,14 +122,34 @@ export default function SignUp() {
         <form onSubmit={handleSignUp} className={styles.form}>
           <div className={styles.inputGroup}>
             <label>Roll Number</label>
-            <input 
-              type="text" 
-              placeholder="Enter your roll number" 
-              value={rollNumber}
-              onChange={(e) => setRollNumber(e.target.value)}
-              required
-              autoFocus
-            />
+            <div className={styles.inputWrapper}>
+              <Hash size={18} className={styles.inputIcon} />
+              <input 
+                type="text" 
+                placeholder="e.g. 22951A0472" 
+                value={rollNumber}
+                onChange={(e) => setRollNumber(e.target.value)}
+                required
+                autoFocus
+                className={styles.inputWithIcon}
+              />
+            </div>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label>Email Address</label>
+            <div className={styles.inputWrapper}>
+              <Mail size={18} className={styles.inputIcon} />
+              <input 
+                type="email" 
+                placeholder="your.email@gmail.com" 
+                value={personalEmail}
+                onChange={(e) => setPersonalEmail(e.target.value)}
+                required
+                className={styles.inputWithIcon}
+              />
+            </div>
+            <span className={styles.fieldHint}>Used for login & password recovery</span>
           </div>
 
           <div className={styles.inputGroup}>

@@ -3,15 +3,15 @@
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { rollToEmail, isValidStudent } from '@/lib/auth-utils';
+import { isEmail, lookupEmailByRoll, isValidStudent } from '@/lib/auth-utils';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, User } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function Login() {
-  const [rollNumber, setRollNumber] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -20,29 +20,36 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!rollNumber || !password) return;
+    if (!identifier || !password) return;
     
     setError('');
     setLoading(true);
     
     try {
-      // Step 1: Basic validation of roll number
-      if (!isValidStudent(rollNumber)) {
-        throw new Error('Access denied. Roll number not found in class database.');
+      let loginEmail: string;
+      
+      if (isEmail(identifier)) {
+        // User entered an email → use it directly for Firebase Auth
+        loginEmail = identifier.trim().toLowerCase();
+      } else {
+        // User entered a roll number → look up their email from Firestore
+        if (!isValidStudent(identifier)) {
+          throw new Error('Roll number not found in class database.');
+        }
+        
+        const email = await lookupEmailByRoll(identifier);
+        if (!email) {
+          throw new Error('No account found for this roll number. Please sign up first.');
+        }
+        loginEmail = email;
       }
       
-      // Step 2: Map to email format used in Firebase
-      const email = rollToEmail(rollNumber);
-      
-      // Step 3: Firebase Auth
-      await signInWithEmailAndPassword(auth, email, password);
-      
-      // Success will be handled by AuthContext redirecting to '/'
-      // but let's push just in case
+      // Firebase Auth sign in with the real email
+      await signInWithEmailAndPassword(auth, loginEmail, password);
       router.push('/');
     } catch (err: any) {
       if (err.code === 'auth/user-not-found') {
-        setError('No account found for this roll number. Please sign up first.');
+        setError('No account found. Please sign up first.');
       } else if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
         setError('Incorrect password. Please try again.');
       } else {
@@ -54,7 +61,6 @@ export default function Login() {
 
   return (
     <main className={styles.container}>
-      {/* Background cinematic elements */}
       <div className={styles.blur} />
       <div className={styles.blur2} />
       
@@ -72,15 +78,19 @@ export default function Login() {
 
         <form onSubmit={handleLogin} className={styles.form}>
           <div className={styles.inputGroup}>
-            <label>Roll Number</label>
-            <input 
-              type="text" 
-              placeholder="Enter your roll number" 
-              value={rollNumber}
-              onChange={(e) => setRollNumber(e.target.value)}
-              required
-              autoFocus
-            />
+            <label>Roll Number or Email</label>
+            <div className={styles.inputWrapper}>
+              <User size={18} className={styles.inputIcon} />
+              <input 
+                type="text" 
+                placeholder="Roll number or email" 
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                required
+                autoFocus
+                className={styles.inputWithIcon}
+              />
+            </div>
           </div>
 
           <div className={styles.inputGroup}>
@@ -88,7 +98,7 @@ export default function Login() {
             <div className={styles.passwordWrapper}>
               <input 
                 type={showPassword ? "text" : "password"} 
-                placeholder="Your choosing" 
+                placeholder="Your password" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -102,6 +112,10 @@ export default function Login() {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
+          </div>
+
+          <div className={styles.forgotLink}>
+            <Link href="/auth/forgot-password">Forgot password?</Link>
           </div>
 
           <AnimatePresence>
@@ -127,7 +141,7 @@ export default function Login() {
         </form>
 
         <div className={styles.footer}>
-          <span>Don't have an account?</span>
+          <span>Don&apos;t have an account?</span>
           <Link href="/auth/signup">Sign Up</Link>
         </div>
       </motion.div>
