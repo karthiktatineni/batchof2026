@@ -12,19 +12,19 @@ const chapters = [
     id: '01',
     title: 'A Hello That Felt Like Home',
     subtitle: 'We walked in as strangers, unaware that we were about to find our lifelong tribe.',
-    image: '/td2/IMG_7720.jpg',
+    image: '',
   },
   {
     id: '02',
     title: 'The Fests',
     subtitle: 'Between the Vibrant colors, noise and lights we found pieces of ourselves.',
-    image: '/td1/IMG_0273.JPG',
+    image: '',
   },
   {
     id: '03',
     title: 'More Than Just a Goodbye',
     subtitle: "It's not just the end of a semester; it's the beginning of missing you all every single day.",
-    image: '/td2/IMG_7072.JPG',
+    image: '',
   },
 ];
 

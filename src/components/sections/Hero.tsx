@@ -2,14 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import styles from './Hero.module.css';
 import Link from 'next/link';
-import { ArrowDown } from 'lucide-react';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollToPlugin);
-}
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -64,32 +58,6 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const startJourney = (e: React.MouseEvent) => {
-    e.preventDefault();
-    gsap.killTweensOf(window);
-
-    // Continuous top-to-bottom cinematic scroll
-    const tl = gsap.to(window, {
-      scrollTo: { y: "max" },
-      duration: 35, // Adjust speed as needed
-      ease: 'none', // Straight linear scroll
-      overwrite: 'auto'
-    });
-
-    const stopScroll = () => {
-      tl.kill();
-      gsap.killTweensOf(window);
-      window.removeEventListener('wheel', stopScroll);
-      window.removeEventListener('touchstart', stopScroll);
-      window.removeEventListener('mousedown', stopScroll);
-    };
-
-    // User can stop by interacting
-    window.addEventListener('wheel', stopScroll, { passive: true });
-    window.addEventListener('touchstart', stopScroll, { passive: true });
-    window.addEventListener('mousedown', stopScroll, { passive: true });
-  };
-
   return (
     <section className={styles.hero} ref={heroRef} id="hero">
       {/* Background Layers */}
@@ -120,11 +88,8 @@ export default function Hero() {
         </p>
 
         <div className={styles.ctaWrapper} ref={ctaRef}>
-          <a href="#chapters" className={styles.primaryBtn} onClick={startJourney}>
-            <span className={styles.btnText}>Start the Journey</span>
-          </a>
-          <Link href="/class" className={styles.ghostBtn}>
-            <span>Meet the Class</span>
+          <Link href="/class" className={styles.primaryBtn}>
+            <span className={styles.btnText}>Meet the Class</span>
           </Link>
         </div>
       </div>

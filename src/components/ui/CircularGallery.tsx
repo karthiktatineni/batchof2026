@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 import { useGesture } from '@use-gesture/react';
 import styles from './CircularGallery.module.css';
+import { getCdnUrl } from '@/utils/cdn';
 
 interface CircularGalleryProps {
   bend?: number;
@@ -22,32 +23,34 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const rotation = useMotionValue(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   const items = useMemo(() => {
-    const images = [
-      '/td3/IMG20250415124257.jpg',
-      '/td3/IMG20250415124815.jpg',
-      '/td3/IMG20250415125707.jpg',
-      '/td3/IMG20250415130055.jpg',
-      '/td3/IMG20250415141656.jpg',
-      '/td3/IMG20250415144357.jpg',
-      '/td1/IMG_0440.JPG',
-      '/td1/IMG_E0044.JPG',
-      '/td3/IMG20250415160503.jpg',
-      '/td3/IMG20250416191619.jpg',
-      '/td1/IMG_0236.JPG',
-      '/td1/IMG_0273.JPG',
-    ];
+    // Current images are empty as requested
+    const images: string[] = [];
+    
+    if (images.length === 0) return [];
+
+    const total = images.length;
     return images.map((src, i) => ({
       id: i,
-      src,
-      angle: (i / 12) * 360,
+      src: getCdnUrl(src),
+      angle: (i / total) * 360,
     }));
   }, []);
 
   const smoothRotation = useSpring(rotation, { 
-    damping: 30, 
-    stiffness: 120,
+    damping: isMobile ? 40 : 30, // Smoother damping for mobile
+    stiffness: isMobile ? 100 : 120,
     mass: 0.5,
     restDelta: 0.001,
   });
@@ -57,7 +60,6 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
       const container = containerRef.current;
       if (!container) return;
 
-      // Check if the scroll happened inside our gallery box
       const rect = container.getBoundingClientRect();
       const isInside = (
         e.clientX >= rect.left &&
@@ -67,22 +69,17 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
       );
 
       if (isInside) {
-        // Stop the page from scrolling
         if (e.cancelable) {
           e.preventDefault();
         }
         e.stopPropagation();
         
-        // Apply rotation
         const current = rotation.get();
-        // Increased sensitivity for a more responsive feel
         rotation.set(current + e.deltaY * 0.4 * scrollSpeed);
       }
     };
 
-    // Attach to window to guarantee we catch the event before it scrolls the page
     window.addEventListener('wheel', handleGlobalWheel, { passive: false });
-
     return () => {
       window.removeEventListener('wheel', handleGlobalWheel);
     };
@@ -103,8 +100,9 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
     }
   );
 
-  // Adjust radius based on bend - higher bend means tighter circle (further away)
-  const radius = 450 + (bend * 20);
+  const radius = (isMobile ? 300 : 450) + (bend * 20);
+
+  if (items.length === 0) return null;
 
   return (
     <div ref={containerRef} {...bind()} className={styles.wrapper}>
@@ -132,7 +130,7 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
               <div 
                 className={styles.overlay} 
                 style={{ background: `linear-gradient(to bottom, transparent 60%, ${textColor}33)` }} 
-              />
+                />
             </div>
           ))}
         </motion.div>

@@ -2,33 +2,28 @@
 
 import { useState } from 'react';
 import styles from './StoryReels.module.css';
+import { getCdnUrl } from '@/utils/cdn';
 
 const reels = [
   {
     id: 1,
-    title: 'THE BOYS ',
-    images: [
-      '/td2/IMG_7794.jpg',
-      '/td2/IMG_7720.jpg',
-      '/td2/IMG_7188.jpg',
-      '/td1/IMG_0485.JPG'
-    ]
-  }
-  ,
+    title: 'THE BOYS',
+    images: []
+  },
   {
     id: 2,
     title: '',
-    images: ['/td3/IMG20250415114235.jpg', '/td3/IMG20250415124257.jpg', '/td3/IMG20250415124815.jpg']
+    images: []
   },
   {
     id: 3,
     title: '',
-    images: ['/td3/IMG20250415120108.jpg', '/td3/IMG20250415120705.jpg', '/td3/IMG20250415123112.jpg']
+    images: []
   },
   {
     id: 4,
     title: '',
-    images: ['/td3/IMG20250415120412.jpg', '/td1/IMG_0236.JPG', '/td1/IMG_0273.JPG', '/td1/IMG_0358.JPG']
+    images: []
   },
 ];
 
@@ -37,6 +32,9 @@ export default function StoryReels() {
   const [currentIdx, setCurrentIdx] = useState(0);
 
   const activeReel = reels.find(r => r.id === activeReelId);
+
+  // Filter out empty reels for the main list
+  const validReels = reels.filter(r => r.images.length > 0);
 
   const nextImage = () => {
     if (!activeReel) return;
@@ -59,6 +57,8 @@ export default function StoryReels() {
     setCurrentIdx(0);
   };
 
+  if (validReels.length === 0) return null;
+
   return (
     <section className={`section ${styles.section}`} id="stories">
       <div className={`container ${styles.container}`}>
@@ -68,7 +68,7 @@ export default function StoryReels() {
         </div>
 
         <div className={styles.reelsWrapper}>
-          {reels.map((reel, idx) => (
+          {validReels.map((reel, idx) => (
             <div
               key={reel.id}
               className={`${styles.reelCard} reveal`}
@@ -76,7 +76,7 @@ export default function StoryReels() {
               onClick={() => openReel(reel.id)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={reel.images[0]} alt={reel.title} className={styles.image} loading="lazy" />
+              <img src={getCdnUrl(reel.images[0])} alt={reel.title} className={styles.image} loading="lazy" />
               <div className={styles.overlay}>
                 <div className={styles.ring} />
                 <h3 className={styles.title}>{reel.title}</h3>
@@ -115,7 +115,7 @@ export default function StoryReels() {
 
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={activeReel.images[currentIdx]}
+                  src={getCdnUrl(activeReel.images[currentIdx])}
                   alt="Story content"
                   className={styles.modalImage}
                 />

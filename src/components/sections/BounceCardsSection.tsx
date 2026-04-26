@@ -1,14 +1,9 @@
 import BounceCards from '@/components/ui/BounceCards';
 import styles from './BounceCardsSection.module.css';
+import { getCdnUrl } from '@/utils/cdn';
 
 export default function BounceCardsSection() {
-  const images = [
-    "/td1/IMG_0485.JPG",
-    "/td1/IMG_E0044.JPG",
-    "/td3/IMG20250415120705.jpg",
-    "/td3/IMG20250415123112.jpg",
-    "/td3/IMG20250415124255.jpg"
-  ];
+  const images: string[] = [];
 
     const transformStyles = [
       "rotate(15deg) translate(-220px, -150px)",
@@ -17,6 +12,10 @@ export default function BounceCardsSection() {
       "rotate(-8deg) translate(110px, -220px)",
       "rotate(-15deg) translate(220px, -150px)"
     ];
+
+    if (images.length === 0) return null;
+
+    const cdnImages = images.map(img => getCdnUrl(img));
 
     return (
       <section className={`section ${styles.section}`} id="bounce-cards">
@@ -35,7 +34,7 @@ export default function BounceCardsSection() {
           <div className={styles.cardsWrapper}>
             <BounceCards
               className="custom-bounceCards reveal"
-              images={images}
+              images={cdnImages}
               containerWidth={600}
               containerHeight={300}
               animationDelay={0.2}

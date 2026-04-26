@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGesture } from '@use-gesture/react';
 import { gsap } from 'gsap';
+import { getCdnUrl } from '@/utils/cdn';
 
 interface DomeGalleryProps {
   fit?: number;
@@ -15,21 +16,28 @@ interface DomeGalleryProps {
 
 export default function DomeGallery({
   fit = 0.8,
-  minRadius = 800, // Slightly larger radius for more space
-  maxVerticalRotationDeg = 60, // Significantly increased for better up/down movement
+  minRadius = 800,
+  maxVerticalRotationDeg = 60,
   segments = 34,
-  dragDampening = 10, // Significantly reduced sensitivity
+  dragDampening = 10,
   grayscale = false,
 }: DomeGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const rotationRef = useRef({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const bind = useGesture({
     onDrag: ({ delta: [dx, dy], memo = { x: 0, y: 0 } }) => {
       if (!containerRef.current) return;
       
-      // Update cumulative values with deltas
-      // We divide by a factor to control sensitivity
       const nextX = memo.x + dx / 4; 
       const nextY = Math.max(
         -maxVerticalRotationDeg, 
@@ -47,20 +55,19 @@ export default function DomeGallery({
     },
   }, {
     drag: {
-      from: () => [0, 0], // reset start point
+      from: () => [0, 0],
     }
   });
 
   const generateImages = () => {
-    const total = 24;
-    const pool = [
-      '/td1/IMG_0236.JPG', '/td1/IMG_0273.JPG', '/td1/IMG_0358.JPG', '/td1/IMG_0440.JPG', '/td1/IMG_0485.JPG', '/td1/IMG_E0044.JPG',
-      '/td3/IMG20250415114235.jpg', '/td3/IMG20250415120108.jpg', '/td3/IMG20250415120412.jpg', '/td3/IMG20250415120705.jpg',
-      '/td3/IMG20250415123112.jpg', '/td3/IMG20250415124255.jpg', '/td3/IMG20250415124257.jpg', '/td3/IMG20250415124815.jpg',
-      '/td3/IMG20250415125707.jpg', '/td3/IMG20250415130055.jpg', '/td3/IMG20250415141656.jpg', '/td3/IMG20250415144357.jpg',
-      '/td3/IMG20250415150222.jpg', '/td3/IMG20250415150300.jpg', '/td3/IMG20250415160503.jpg', '/td3/IMG20250416191619.jpg'
-    ];
+    // Current pool is empty as requested
+    const pool: string[] = [];
+    
+    // Fallback if empty, but we'll respect "delete all"
+    if (pool.length === 0) return null;
 
+    const total = isMobile ? 12 : 24; // Optimized for mobile performance
+    
     return Array.from({ length: total }).map((_, i) => {
       const angle = (i / total) * Math.PI * 2;
       const radius = minRadius;
@@ -69,7 +76,7 @@ export default function DomeGallery({
       const rotateY = angle * (180 / Math.PI);
       
       const verticalVariation = (i % 3 - 1) * 280 + (Math.sin(i) * 60);
-      const imgSrc = pool[i % pool.length];
+      const imgSrc = getCdnUrl(pool[i % pool.length]);
 
       return (
         <div
@@ -79,8 +86,8 @@ export default function DomeGallery({
             left: '50%',
             top: '50%',
             transform: `translate(-50%, -50%) translate3d(${x}px, ${verticalVariation}px, ${z}px) rotateY(${rotateY}deg)`,
-            width: '200px',
-            height: '280px',
+            width: isMobile ? '160px' : '200px',
+            height: isMobile ? '220px' : '280px',
             transformStyle: 'preserve-3d',
             backfaceVisibility: 'hidden',
           }}
@@ -90,6 +97,7 @@ export default function DomeGallery({
             src={imgSrc} 
             alt={`Gallery image ${i}`}
             draggable={false}
+            loading="lazy"
             style={{
               width: '100%',
               height: '100%',
@@ -112,10 +120,10 @@ export default function DomeGallery({
         width: '100%',
         height: '100%',
         position: 'relative',
-        perspective: '1500px', // More depth for the dome
+        perspective: '1500px',
         overflow: 'hidden',
         cursor: 'grab',
-        touchAction: 'none', // Critical: prevent browser scroll hijacking vertical drags
+        touchAction: 'none',
       }}
       {...bind()}
     >
