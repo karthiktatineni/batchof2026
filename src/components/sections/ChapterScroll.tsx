@@ -12,7 +12,7 @@ const chapters = [
     id: '01',
     title: 'A Hello That Felt Like Home',
     subtitle: 'We walked in as strangers, unaware that we were about to find our lifelong tribe.',
-    image: '',
+    image: '/Group%20photo.jpeg',
   },
   {
     id: '02',
