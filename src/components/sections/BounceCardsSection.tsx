@@ -3,7 +3,13 @@ import styles from './BounceCardsSection.module.css';
 import { getCdnUrl } from '@/utils/cdn';
 
 export default function BounceCardsSection() {
-  const images: string[] = [];
+  const images = [
+    '/Any group Photos Taken by Your batch (File responses)/IMG-20230503-WA0019 - Murali Krishna.jpg',
+    '/Any group Photos Taken by Your batch (File responses)/IMG-20240803-WA0003 - Hemasri Podakanti.jpg',
+    '/Any group Photos Taken by Your batch (File responses)/IMG-20241213-WA0268 - Hemasri Podakanti.jpg',
+    '/Any group Photos Taken by Your batch (File responses)/IMG-20230427-WA0047 - Nagaraj Gatla.jpg',
+    '/Any group Photos Taken by Your batch (File responses)/IMG-20221229-WA0008 - Murali Krishna.jpg',
+  ];
 
     const transformStyles = [
       "rotate(15deg) translate(-220px, -150px)",
@@ -15,7 +21,7 @@ export default function BounceCardsSection() {
 
     if (images.length === 0) return null;
 
-    const cdnImages = images.map(img => getCdnUrl(img));
+    const cdnImages = images;
 
     return (
       <section className={`section ${styles.section}`} id="bounce-cards">

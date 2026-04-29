@@ -185,6 +185,21 @@
   line-height: var(--leading-relaxed);
 }
 
+.infoImageWrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+  background: var(--color-bg-deep);
+}
+
+.infoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .locationBadge {
   position: absolute;
   bottom: var(--space-md);

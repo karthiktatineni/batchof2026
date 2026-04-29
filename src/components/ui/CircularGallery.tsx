@@ -35,24 +35,34 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
   }, []);
   
   const items = useMemo(() => {
-    // Current images are empty as requested
-    const images: string[] = [];
+    // Group photos for the circular gallery
+    const images = [
+      '/WhatsApp Image 2026-04-29 at 10.32.40 AM.jpeg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260315-WA0081 - B Krishna.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260313-WA0542 - Hemasri Podakanti.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/group pic - 23955A0408 PADIGELA KALYANI.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG_0006 - Lingam Suresh.jpeg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260315-WA0068 - EDHA MEGHANA.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260404-WA0003 - Hemasri Podakanti.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260405-WA0009 - Nithinreddy Diddakuntla.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/group photo - JAHNAVI MUDILI.jpeg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG_20260314_190526767_HDR_PORTRAIT - Preetham Preetham.jpg',
+    ];
     
     if (images.length === 0) return [];
 
     const total = images.length;
     return images.map((src, i) => ({
       id: i,
-      src: getCdnUrl(src),
+      src: src, // No getCdnUrl needed if we use absolute paths in public
       angle: (i / total) * 360,
     }));
   }, []);
 
   const smoothRotation = useSpring(rotation, { 
-    damping: isMobile ? 40 : 30, // Smoother damping for mobile
-    stiffness: isMobile ? 100 : 120,
-    mass: 0.5,
-    restDelta: 0.001,
+    damping: 20,
+    stiffness: 90,
+    mass: 0.1,
   });
 
   React.useEffect(() => {
@@ -100,7 +110,7 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
     }
   );
 
-  const radius = (isMobile ? 300 : 450) + (bend * 20);
+  const radius = (isMobile ? 320 : 600) + (bend * 10);
 
   if (items.length === 0) return null;
 

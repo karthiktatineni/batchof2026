@@ -140,7 +140,10 @@ export default function ForgotPassword() {
                 We&apos;ve sent a password reset link to <strong>{email}</strong>. 
                 Click the link in the email to set a new password.
               </p>
-              <p className={styles.successHint}>Didn&apos;t receive it? Check your spam folder or try again.</p>
+              <p className={styles.successHint}>
+                <span className={styles.alertIcon}>⚠️</span> 
+                <strong>Important:</strong> If you don&apos;t see the email within 2 minutes, please <strong>check your spam folder</strong>.
+              </p>
               
               <div className={styles.successActions}>
                 <button 

@@ -23,6 +23,11 @@ const folders = [
     name: 'Fourth year photos or any td pics in specified years (File responses)',
     category: '4th Year',
     prefix: 'y4'
+  },
+  {
+    name: 'Any group Photos Taken by Your batch (File responses)',
+    category: '4th Year', // Putting group photos in 4th year or maybe a new category?
+    prefix: 'gp'
   }
 ];
 

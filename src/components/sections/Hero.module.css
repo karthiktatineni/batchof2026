@@ -22,9 +22,9 @@
   width: 200%;
   height: 200%;
   background: 
-    radial-gradient(circle at 50% 50%, rgba(200, 149, 108, 0.15), transparent 40%),
-    radial-gradient(circle at 20% 80%, rgba(194, 120, 120, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 20%, rgba(212, 165, 116, 0.1), transparent 40%);
+    radial-gradient(circle at 50% 50%, rgba(192, 192, 192, 0.15), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(168, 168, 168, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(229, 228, 226, 0.1), transparent 40%);
   animation: slowPan 25s linear infinite alternate;
   pointer-events: none;
 }
@@ -83,8 +83,8 @@
   align-items: center;
   gap: 10px;
   padding: 8px 16px;
-  background: rgba(200, 149, 108, 0.05);
-  border: 1px solid rgba(200, 149, 108, 0.2);
+  background: rgba(192, 192, 192, 0.05);
+  border: 1px solid rgba(192, 192, 192, 0.2);
   border-radius: 50px;
   backdrop-filter: blur(10px);
   margin-bottom: var(--space-lg);
@@ -97,7 +97,7 @@
   position: absolute;
   top: 0; left: -100%;
   width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(200, 149, 108, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.2), transparent);
   animation: shine 4s ease-in-out infinite;
 }
 
@@ -145,6 +145,14 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   padding-right: 0.2em; /* Ensure italics aren't cut off */
+}
+
+.goldText {
+  background: linear-gradient(to right, var(--color-accent-warm), var(--color-accent-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
 
 .subtitle {

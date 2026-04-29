@@ -3,7 +3,7 @@ const path = require('path');
 
 const rootDir = process.cwd();
 const studentsPath = path.join(rootDir, 'src', 'lib', 'students.json');
-const photosDir = path.join(rootDir, 'public', 'profile photos');
+const photosDir = path.join(rootDir, 'public', 'Solo Photo', 'Solo Photo Of Yours (File responses)');
 
 if (!fs.existsSync(studentsPath)) {
     console.error(`Students file not found at ${studentsPath}`);
@@ -66,7 +66,7 @@ mapping.forEach(m => {
             let bestFile = matchingFiles.find(f => !f.toLowerCase().endsWith('.heic'));
             if (!bestFile) bestFile = matchingFiles[0];
             
-            students[studentIndex].image = `/profile%20photos/${encodeURIComponent(bestFile)}`;
+            students[studentIndex].image = `/Solo Photo/Solo Photo Of Yours (File responses)/${encodeURIComponent(bestFile)}`;
             console.log(`Updated ${students[studentIndex].name} with ${bestFile}`);
             updatedCount++;
         }

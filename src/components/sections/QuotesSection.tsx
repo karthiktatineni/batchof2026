@@ -13,10 +13,10 @@ const quotes = [
 ];
 
 const bgImages = [
-  "/td1/IMG_0358.JPG",
-  "/td3/IMG20250415125707.jpg",
-  "/td3/IMG20250415150300.jpg",
-  "/td1/IMG_0273.JPG"
+  '/Any group Photos Taken by Your batch (File responses)/IMG-20260315-WA0081 - B Krishna.jpg',
+  '/Any group Photos Taken by Your batch (File responses)/IMG-20260313-WA0542 - Hemasri Podakanti.jpg',
+  '/Any group Photos Taken by Your batch (File responses)/group pic - 23955A0408 PADIGELA KALYANI.jpg',
+  '/Any group Photos Taken by Your batch (File responses)/IMG_0006 - Lingam Suresh.jpeg'
 ];
 
 export default function QuotesSection() {
@@ -68,35 +68,53 @@ export default function QuotesSection() {
           opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 85%',
-            end: 'bottom 15%',
+            start: 'top 95%',
+            end: 'bottom 5%',
             toggleActions: 'play none none reverse'
           }
         }
       );
     });
 
-    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+    // Slideshow + Scroll logic
+    bgRefs.current.forEach((img, i) => {
+      if (!img) return;
+      
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: `top+=${(i / bgImages.length) * 100}% center`,
+        end: `top+=${((i + 1) / bgImages.length) * 100}% center`,
+        onToggle: self => {
+          if (self.isActive) {
+            gsap.to(bgRefs.current, { opacity: 0, duration: 1.5 });
+            gsap.to(img, { opacity: 1, duration: 1.5 });
+          }
+        }
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
   }, []);
 
   return (
     <section className={`section ${styles.section}`} ref={containerRef}>
       <div className={styles.background}>
         {bgImages.map((src, i) => (
-          <img 
+          <div 
             key={src}
-            ref={el => { bgRefs.current[i] = el; }}
-            src={src} 
-            alt={`Atmosphere ${i}`} 
-            className={styles.bgImage} 
+            ref={el => { bgRefs.current[i] = el as any; }}
+            className={styles.bgImageWrapper}
             style={{ 
-              position: 'absolute', 
               opacity: i === 0 ? 1 : 0,
-              zIndex: i + 1
-            }} 
-          />
+              zIndex: i === 0 ? 2 : 1
+            }}
+          >
+            <img src={src} alt="" className={styles.bgImage} />
+          </div>
         ))}
-        <div className={styles.overlay} style={{ zIndex: bgImages.length + 1 }} />
+        <div className={styles.overlay} />
       </div>
       
       <div className={`container ${styles.container}`}>

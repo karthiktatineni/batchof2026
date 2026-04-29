@@ -80,7 +80,9 @@ export default function Hero() {
           <span className={styles.headlineLine}>
             <span className={styles.italicText}>campus.</span> A thousand
           </span>
-          <span className={styles.headlineLine}>memories.</span>
+          <span className={styles.headlineLine}>
+            <span className={styles.goldText}>memories.</span>
+          </span>
         </h1>
 
         <p className={styles.subtitle} ref={subtitleRef}>

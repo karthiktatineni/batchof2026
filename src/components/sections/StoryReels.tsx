@@ -7,23 +7,39 @@ import { getCdnUrl } from '@/utils/cdn';
 const reels = [
   {
     id: 1,
-    title: 'THE BOYS',
-    images: []
+    title: 'CLASS VIBES',
+    images: [
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260315-WA0081 - B Krishna.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260315-WA0068 - EDHA MEGHANA.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG_0006 - Lingam Suresh.jpeg'
+    ]
   },
   {
     id: 2,
-    title: '',
-    images: []
+    title: 'THE SQUAD',
+    images: [
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260313-WA0542 - Hemasri Podakanti.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260404-WA0003 - Hemasri Podakanti.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/group pic - 23955A0408 PADIGELA KALYANI.jpg'
+    ]
   },
   {
     id: 3,
-    title: '',
-    images: []
+    title: 'MEMORIES',
+    images: [
+      '/Any group Photos Taken by Your batch (File responses)/IMG20260413122612 - 083-manju bhashini.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG_20250701_002137 - Niranjan Devana.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/group photo - JAHNAVI MUDILI.jpeg'
+    ]
   },
   {
     id: 4,
-    title: '',
-    images: []
+    title: 'FAREWELL',
+    images: [
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20240421-WA0043 - G. Suresh.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG_20240419_234245 - Lithik Raj.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20260405-WA0009 - Nithinreddy Diddakuntla.jpg'
+    ]
   },
 ];
 
@@ -76,10 +92,9 @@ export default function StoryReels() {
               onClick={() => openReel(reel.id)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={getCdnUrl(reel.images[0])} alt={reel.title} className={styles.image} loading="lazy" />
+              <img src={reel.images[0]} alt={reel.title} className={styles.image} loading="lazy" />
               <div className={styles.overlay}>
                 <div className={styles.ring} />
-                <h3 className={styles.title}>{reel.title}</h3>
               </div>
             </div>
           ))}
@@ -115,7 +130,7 @@ export default function StoryReels() {
 
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={getCdnUrl(activeReel.images[currentIdx])}
+                  src={activeReel.images[currentIdx]}
                   alt="Story content"
                   className={styles.modalImage}
                 />

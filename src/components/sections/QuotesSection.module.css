@@ -8,33 +8,9 @@
   padding: 10vh 0;
 }
 
-.background {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 1;
-}
-
-.bgImage {
-  position: absolute; /* Stack images on top of each other */
-  top: 0; left: 0;
-  width: 100%;
-  height: 120%; /* For parallax */
-  object-fit: cover;
-  pointer-events: none;
-}
-
-.overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(180deg, 
-    var(--color-bg-deep) 0%, 
-    rgba(8, 8, 13, 0.7) 50%, 
-    var(--color-bg-deep) 100%);
-}
-
 .container {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   gap: var(--space-3xl);
@@ -42,29 +18,31 @@
   max-width: 900px;
 }
 
-.quoteBlock {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+.background {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1;
 }
 
-.quoteText {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  line-height: var(--leading-tight);
-  color: var(--color-text-primary);
-  font-weight: 400;
-  font-style: italic;
+.bgImageWrapper {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.author {
-  font-family: var(--font-accent);
-  color: var(--color-accent-warm);
-  font-size: var(--text-label);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: fadeIn 1s ease 1s forwards;
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at center, rgba(8, 8, 13, 0.4) 0%, var(--color-bg-deep) 100%);
+  z-index: 5;
 }
 
 @keyframes fadeIn {

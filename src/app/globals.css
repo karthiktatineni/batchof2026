@@ -38,19 +38,20 @@
   --color-bg-surface: #0f0f17;
   --color-bg-card: #161622;
   --color-bg-elevated: #1c1c2b;
-  --color-accent-warm: #c8956c;
-  --color-accent-gold: #d4a574;
-  --color-accent-glow: #e8c9a0;
+  --color-accent-warm: #d4af37;
+  --color-accent-gold: #ffcc33;
+  --color-accent-glow: #fff4d6;
+  --color-accent-silver: #C0C0C0;
   --color-accent-rose: #c27878;
   --color-text-primary: #f0ece4;
   --color-text-secondary: #9490a0;
   --color-text-muted: #5e5a6a;
-  --color-border: rgba(200, 149, 108, 0.1);
-  --color-border-strong: rgba(200, 149, 108, 0.2);
+  --color-border: rgba(212, 175, 55, 0.1);
+  --color-border-strong: rgba(212, 175, 55, 0.2);
   --color-glass: rgba(15, 15, 23, 0.75);
   --color-glass-light: rgba(15, 15, 23, 0.5);
   --color-overlay: rgba(8, 8, 13, 0.85);
-  --color-glow: rgba(200, 149, 108, 0.15);
+  --color-glow: rgba(212, 175, 55, 0.15);
 
   /* Motion */
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
@@ -199,7 +200,7 @@ button {
 }
 
 .glow-orb--gold {
-  background: radial-gradient(circle, var(--color-accent-gold) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-accent-warm) 0%, transparent 70%);
 }
 
 .divider {
@@ -247,7 +248,7 @@ button {
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--color-accent-warm), var(--color-accent-gold));
+  background: linear-gradient(135deg, var(--color-accent-warm), var(--color-accent-silver));
   color: var(--color-bg-deep);
 }
 .btn--primary:hover {
