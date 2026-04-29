@@ -88,7 +88,7 @@ export default function StoryReels() {
               onClick={() => openReel(reel.id)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={reel.images[0]} alt={reel.title} className={styles.image} loading="lazy" />
+              <img src={reel.images[0]} alt="Story Reel" className={styles.image} loading="lazy" />
               <div className={styles.overlay}>
                 <div className={styles.ring} />
               </div>

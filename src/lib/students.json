@@ -45,7 +45,7 @@
     "id": 8,
     "name": "TATINENI KARTHIK SAI",
     "role": "22951A0472",
-    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/karthik%20tatineni-472.jpeg"
+    "image": "https://ui-avatars.com/api/?name=TATINENI%20KARTHIK%20SAI&background=1e1e1e&color=C0C0C0&size=512"
   },
   {
     "id": 9,
@@ -63,7 +63,7 @@
     "id": 11,
     "name": "P N KOUSHIK SREEVATHSA",
     "role": "22951A0475",
-    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/475%20-%20Koushik%20Sreevathsa%20P%20N.jpg"
+    "image": "https://ui-avatars.com/api/?name=P%20N%20KOUSHIK%20SREEVATHSA&background=1e1e1e&color=C0C0C0&size=512"
   },
   {
     "id": 12,
@@ -93,7 +93,7 @@
     "id": 16,
     "name": "KONKA LIKHITHA",
     "role": "22951A0480",
-    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/IMG20250415124648%20-%20Likhitha%20konka.jpg"
+    "image": "https://ui-avatars.com/api/?name=KONKA%20LIKHITHA&background=1e1e1e&color=C0C0C0&size=512"
   },
   {
     "id": 17,
@@ -117,7 +117,7 @@
     "id": 20,
     "name": "YAGNASRI MADHAV",
     "role": "22951A0484",
-    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/madhav.jpeg"
+    "image": "https://ui-avatars.com/api/?name=YAGNASRI%20MADHAV&background=1e1e1e&color=C0C0C0&size=512"
   },
   {
     "id": 21,
@@ -153,13 +153,13 @@
     "id": 26,
     "name": "MADDELA MANI SAKETH",
     "role": "22951A0490",
-    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/manisakt.jpeg"
+    "image": "https://ui-avatars.com/api/?name=MADDELA%20MANI%20SAKETH&background=1e1e1e&color=C0C0C0&size=512"
   },
   {
     "id": 27,
     "name": "CHANDRAGIRI MANIDEEP",
     "role": "22951A0491",
-    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/manideep.jpeg"
+    "image": "https://ui-avatars.com/api/?name=CHANDRAGIRI%20MANIDEEP&background=1e1e1e&color=C0C0C0&size=512"
   },
   {
     "id": 28,
@@ -171,13 +171,13 @@
     "id": 29,
     "name": "DANGUDUBIYYAPU MANIKANTA",
     "role": "22951A0493",
-    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/IMG-20260214-WA0005%20-%20ballu%20manikanta.jpg"
+    "image": "https://ui-avatars.com/api/?name=DANGUDUBIYYAPU%20MANIKANTA&background=1e1e1e&color=C0C0C0&size=512"
   },
   {
     "id": 30,
     "name": "MARRI NEHA",
     "role": "22951A0494",
-    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/neha%20-%20494.jpeg"
+    "image": "https://ui-avatars.com/api/?name=MARRI%20NEHA&background=1e1e1e&color=C0C0C0&size=512"
   },
   {
     "id": 31,
@@ -382,5 +382,47 @@
     "name": "KONDAKALA PRIYANKA",
     "role": "22951A04C8",
     "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/IMG_1932%20-%20Kondakala%20Priyanka.jpg"
+  },
+  {
+    "id": 65,
+    "name": "PADIGELA KALYANI",
+    "role": "23955A0408",
+    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/solopic%20-%2023955A0408%20PADIGELA%20KALYANI.jpg"
+  },
+  {
+    "id": 66,
+    "name": "BUSSU KRISHNA",
+    "role": "23955A0409",
+    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/IMG_20260402_101717%20-%20B%20Krishna.jpg"
+  },
+  {
+    "id": 67,
+    "name": "MALOTH LAVANYA",
+    "role": "23955A0410",
+    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/IMG_20260118_135600%20-%20Maloth%20Lavanya.jpg"
+  },
+  {
+    "id": 68,
+    "name": "GUGULOTHU MAHESH",
+    "role": "23955A0411",
+    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/IMG_20260428_211706%20-%20G.%20Suresh.jpg"
+  },
+  {
+    "id": 69,
+    "name": "HULIMANI MANJU BHASHINI",
+    "role": "23955A0412",
+    "image": "/Solo%20Photo/Solo%20Photo%20Of%20Yours%20(File%20responses)/IMG20250804093323%20-%20083-manju%20bhashini.jpg"
+  },
+  {
+    "id": 70,
+    "name": "SHEELAM MANOJ REDDY",
+    "role": "23955A0413",
+    "image": "https://ui-avatars.com/api/?name=SHEELAM%20MANOJ%20REDDY&background=1e1e1e&color=C0C0C0&size=512"
+  },
+  {
+    "id": 71,
+    "name": "MD SHABHANA THANIYA",
+    "role": "23955A0414",
+    "image": "https://ui-avatars.com/api/?name=MD%20SHABHANA%20THANIYA&background=1e1e1e&color=C0C0C0&size=512"
   }
 ]
