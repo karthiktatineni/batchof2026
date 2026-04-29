@@ -17,7 +17,7 @@ export default function MeetTheClass() {
       <header className={styles.header}>
         <div className="section-label">Class of 2026</div>
         <h1>Meet the Class</h1>
-        <p>The individuals who made the last four years unforgettable. Hover to reveal.</p>
+        <p>The individuals who made the last four years unforgettable.</p>
       </header>
 
       <section className={styles.grid}>
