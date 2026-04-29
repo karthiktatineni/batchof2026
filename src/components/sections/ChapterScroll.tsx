@@ -18,7 +18,7 @@ const chapters = [
   },
   {
     id: '02',
-    title: 'Brothers for Life',
+    title: 'Memories for Life',
     subtitle: 'Through thick and thin, the friendships we built are the truest treasures of these four years.',
     image: '/WhatsApp Image 2026-04-29 at 10.32.40 AM (3).jpeg',
     position: 'top',
