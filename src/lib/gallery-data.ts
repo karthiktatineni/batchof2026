@@ -13,9 +13,9 @@ export interface GalleryImage {
 export const galleryImages: GalleryImage[] = [
   {
     "id": "y1_0",
-    "src": "/WhatsApp Image 2026-04-29 at 10.32.40 AM (2).jpeg",
-    "category": "4th Year",
-    "title": "karthik Tatineni"
+    "src": "/First year photos or any td pics in specified years (File responses)/1681134828036 - Lithik Raj.jpg",
+    "category": "1st Year",
+    "title": "Lithik Raj"
   },
   {
     "id": "y1_1",
@@ -115,9 +115,9 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     "id": "y1_17",
-    "src": "/group.jpeg",
-    "category": "4th Year",
-    "title": "Karthik Tatineni"
+    "src": "/First year photos or any td pics in specified years (File responses)/IMG-20221217-WA0008 - Kanth Balla.jpg",
+    "category": "1st Year",
+    "title": "Kanth Balla"
   },
   {
     "id": "y1_18",
@@ -3790,5 +3790,347 @@ export const galleryImages: GalleryImage[] = [
     "src": "/Any group Photos Taken by Your batch (File responses)/WhatsApp Image 2026-04-02 at 10.39.55 PM - BOLEM MOUNIKA.jpeg",
     "category": "4th Year",
     "title": "BOLEM MOUNIKA"
+  },
+  {
+    "id": "solo_630",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/1000199728 - EDHA MEGHANA(1).webp",
+    "category": "4th Year",
+    "title": "EDHA MEGHANA"
+  },
+  {
+    "id": "solo_631",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/1000279569-01 - Lithik Raj.jpeg",
+    "category": "4th Year",
+    "title": "Lithik Raj"
+  },
+  {
+    "id": "solo_632",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/475 - Koushik Sreevathsa P N.jpg",
+    "category": "4th Year",
+    "title": "Koushik Sreevathsa P N"
+  },
+  {
+    "id": "solo_633",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/4C0 - Medepalli Prajwala.jpg",
+    "category": "4th Year",
+    "title": "Medepalli Prajwala"
+  },
+  {
+    "id": "solo_634",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/875cccbd-a801-4445-9f03-102a54a163d4 - Lingam Suresh.jpeg",
+    "category": "4th Year",
+    "title": "Lingam Suresh"
+  },
+  {
+    "id": "solo_635",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/chary.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_636",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/file_00000000d4c0720b9fd216a55246d8ac - Koushik Allada.png",
+    "category": "4th Year",
+    "title": "Koushik Allada"
+  },
+  {
+    "id": "solo_637",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/harshitha-464.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_638",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20230513-WA0003 - Koushik Allada.jpg",
+    "category": "4th Year",
+    "title": "Koushik Allada"
+  },
+  {
+    "id": "solo_639",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20240725-WA0003 - MALLAM USHA.jpg",
+    "category": "4th Year",
+    "title": "MALLAM USHA"
+  },
+  {
+    "id": "solo_640",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20251211-WA0037 - Hemasri Podakanti.jpg",
+    "category": "4th Year",
+    "title": "Hemasri Podakanti"
+  },
+  {
+    "id": "solo_641",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20260214-WA0005 - ballu manikanta.jpg",
+    "category": "4th Year",
+    "title": "ballu manikanta"
+  },
+  {
+    "id": "solo_642",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20260305-WA0001_Original - DANTULURI PADMA PRIYA.jpeg",
+    "category": "4th Year",
+    "title": "DANTULURI PADMA PRIYA"
+  },
+  {
+    "id": "solo_643",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20260313-WA0040 - PALLEPAGA HYMAVATHI.jpg",
+    "category": "4th Year",
+    "title": "PALLEPAGA HYMAVATHI"
+  },
+  {
+    "id": "solo_644",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20260314-WA0648 - Hemasri Podakanti(1).jpg",
+    "category": "4th Year",
+    "title": "Hemasri Podakanti"
+  },
+  {
+    "id": "solo_645",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20260331-WA0016 - Mohammed Abubaker.jpg",
+    "category": "4th Year",
+    "title": "Mohammed Abubaker"
+  },
+  {
+    "id": "solo_646",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20260402-WA0002 - Mahitha Penkey(1).jpg",
+    "category": "4th Year",
+    "title": "Mahitha Penkey"
+  },
+  {
+    "id": "solo_647",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG-20260402-WA0016 - BOLEM MOUNIKA.jpg",
+    "category": "4th Year",
+    "title": "BOLEM MOUNIKA"
+  },
+  {
+    "id": "solo_648",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG20250415124648 - Likhitha konka.jpg",
+    "category": "4th Year",
+    "title": "Likhitha konka"
+  },
+  {
+    "id": "solo_649",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG20250415135734 - Kancharla Mahesh.jpg",
+    "category": "4th Year",
+    "title": "Kancharla Mahesh"
+  },
+  {
+    "id": "solo_650",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG20250804093323 - 083-manju bhashini.jpg",
+    "category": "4th Year",
+    "title": "083-manju bhashini"
+  },
+  {
+    "id": "solo_651",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG20260313145837 - Kanth Balla.jpg",
+    "category": "4th Year",
+    "title": "Kanth Balla"
+  },
+  {
+    "id": "solo_652",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_1932 - Kondakala Priyanka.jpg",
+    "category": "4th Year",
+    "title": "Kondakala Priyanka"
+  },
+  {
+    "id": "solo_653",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20240704_154903_657 - Murali Krishna.jpg",
+    "category": "4th Year",
+    "title": "Murali Krishna"
+  },
+  {
+    "id": "solo_654",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20240922_065913 - Jeevan Ajmeera.jpg",
+    "category": "4th Year",
+    "title": "Jeevan Ajmeera"
+  },
+  {
+    "id": "solo_655",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20250921_022241 - Niranjan Devana.jpg",
+    "category": "4th Year",
+    "title": "Niranjan Devana"
+  },
+  {
+    "id": "solo_656",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20251110_112401 - NEELAM SINDHU.jpg",
+    "category": "4th Year",
+    "title": "NEELAM SINDHU"
+  },
+  {
+    "id": "solo_657",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260118_135600 - Maloth Lavanya.jpg",
+    "category": "4th Year",
+    "title": "Maloth Lavanya"
+  },
+  {
+    "id": "solo_658",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260313_104110 - Pranathi B(1).jpg",
+    "category": "4th Year",
+    "title": "Pranathi B"
+  },
+  {
+    "id": "solo_659",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260314_000125 - Nithinreddy Diddakuntla.jpg",
+    "category": "4th Year",
+    "title": "Nithinreddy Diddakuntla"
+  },
+  {
+    "id": "solo_660",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260314_011928 - Mayuri Gongalla.jpg",
+    "category": "4th Year",
+    "title": "Mayuri Gongalla"
+  },
+  {
+    "id": "solo_661",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260314_151040_333 - nitishkumar bellamkonda.jpg",
+    "category": "4th Year",
+    "title": "nitishkumar bellamkonda"
+  },
+  {
+    "id": "solo_662",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260314_190526767_HDR_PORTRAIT - Preetham Preetham.jpg",
+    "category": "4th Year",
+    "title": "Preetham Preetham"
+  },
+  {
+    "id": "solo_663",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260402_101224 - Nagaraj Gatla.jpg",
+    "category": "4th Year",
+    "title": "Nagaraj Gatla"
+  },
+  {
+    "id": "solo_664",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260402_101717 - B Krishna.jpg",
+    "category": "4th Year",
+    "title": "B Krishna"
+  },
+  {
+    "id": "solo_665",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260402_134221 - Lohith Lakkakula.jpg",
+    "category": "4th Year",
+    "title": "Lohith Lakkakula"
+  },
+  {
+    "id": "solo_666",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260404_190502 - BANDI PAVAN SAI.jpg",
+    "category": "4th Year",
+    "title": "BANDI PAVAN SAI"
+  },
+  {
+    "id": "solo_667",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_20260428_211706 - G. Suresh.jpg",
+    "category": "4th Year",
+    "title": "G. Suresh"
+  },
+  {
+    "id": "solo_668",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_4121 - Pavani Reddy.jpg",
+    "category": "4th Year",
+    "title": "Pavani Reddy"
+  },
+  {
+    "id": "solo_669",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/IMG_6015 - PERUGU PAVAN SRI MANIKANTA.jpeg",
+    "category": "4th Year",
+    "title": "PERUGU PAVAN SRI MANIKANTA"
+  },
+  {
+    "id": "solo_670",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/karthik tatineni-472.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_671",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/Krishna shri mohan 472.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_672",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/madhav.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_673",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/manideep.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_674",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/manisakt.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_675",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/meg - RASAMALLA MEGHANA.jpeg",
+    "category": "4th Year",
+    "title": "RASAMALLA MEGHANA"
+  },
+  {
+    "id": "solo_676",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/Murali-4a0.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_677",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/neha - 494.jpeg",
+    "category": "4th Year",
+    "title": "494"
+  },
+  {
+    "id": "solo_678",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/niroosh 4A9.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_679",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/nishanth.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_680",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/nitish b3.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_681",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/paramesh.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_682",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/photo-1 - JAHNAVI MUDILI.jpeg",
+    "category": "4th Year",
+    "title": "JAHNAVI MUDILI"
+  },
+  {
+    "id": "solo_683",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/Preethi-4c7.jpeg",
+    "category": "4th Year",
+    "title": "Memory"
+  },
+  {
+    "id": "solo_684",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/Screenshot_20260321-222653 - M Likith Mahendra(1).jpg",
+    "category": "4th Year",
+    "title": "M Likith Mahendra"
+  },
+  {
+    "id": "solo_685",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/Screenshot_20260402_083911 - Nikhil Goud.jpg",
+    "category": "4th Year",
+    "title": "Nikhil Goud"
+  },
+  {
+    "id": "solo_686",
+    "src": "/Solo Photo/Solo Photo Of Yours (File responses)/solopic - 23955A0408 PADIGELA KALYANI.jpg",
+    "category": "4th Year",
+    "title": "23955A0408 PADIGELA KALYANI"
   }
 ];
