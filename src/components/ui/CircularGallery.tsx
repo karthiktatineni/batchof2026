@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 import { useGesture } from '@use-gesture/react';
 import styles from './CircularGallery.module.css';
-import { getCdnUrl } from '@/utils/cdn';
 
 interface CircularGalleryProps {
   bend?: number;
@@ -21,7 +20,7 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
   borderRadius = 12,
   textColor = '#ffffff',
 }) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const rotation = useMotionValue(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -35,7 +34,6 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
   }, []);
   
   const items = useMemo(() => {
-    // Group photos for the circular gallery
     const images = [
       '/WhatsApp Image 2026-04-29 at 10.32.40 AM.jpeg',
       '/Any group Photos Taken by Your batch (File responses)/IMG-20260315-WA0081 - B Krishna.jpg',
@@ -54,19 +52,20 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
     const total = images.length;
     return images.map((src, i) => ({
       id: i,
-      src: src, // No getCdnUrl needed if we use absolute paths in public
+      src: src,
       angle: (i / total) * 360,
     }));
   }, []);
 
   const smoothRotation = useSpring(rotation, { 
-    damping: 20,
-    stiffness: 90,
+    damping: 30,
+    stiffness: 120,
     mass: 0.1,
   });
 
-  React.useEffect(() => {
-    const handleGlobalWheel = (e: WheelEvent) => {
+  // Local wheel listener - only works when mouse is over the container
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
       const container = containerRef.current;
       if (!container) return;
 
@@ -79,38 +78,35 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
       );
 
       if (isInside) {
-        if (e.cancelable) {
-          e.preventDefault();
-        }
-        e.stopPropagation();
-        
-        const current = rotation.get();
-        rotation.set(current + e.deltaY * 0.4 * scrollSpeed);
+        // Only prevent default if we're actually over the gallery
+        if (e.cancelable) e.preventDefault();
+        rotation.set(rotation.get() + e.deltaY * 0.5 * scrollSpeed);
       }
     };
 
-    window.addEventListener('wheel', handleGlobalWheel, { passive: false });
-    return () => {
-      window.removeEventListener('wheel', handleGlobalWheel);
-    };
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
   }, [rotation, scrollSpeed]);
 
   const bind = useGesture(
     {
       onDrag: ({ delta: [dx] }) => {
-        const current = rotation.get();
-        rotation.set(current + dx * 0.4);
+        rotation.set(rotation.get() + dx * 0.6);
       },
     },
     { 
       drag: { 
         filterTaps: true,
-        from: () => [0, 0],
       }
     }
   );
 
-  const radius = (isMobile ? 320 : 600) + (bend * 10);
+  // Responsive radius calculation for sharp 3D
+  const radius = useMemo(() => {
+    if (typeof window === 'undefined') return 600;
+    const baseRadius = window.innerWidth < 480 ? 280 : window.innerWidth < 768 ? 400 : 650;
+    return baseRadius + (bend * 10);
+  }, [bend, isMobile]);
 
   if (items.length === 0) return null;
 
@@ -131,11 +127,13 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
                 color: textColor,
               }}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={item.src} 
                 alt={`Memory ${item.id}`} 
                 className={styles.image}
-                loading="lazy"
+                loading="eager" // Load eager for clarity and speed
+                decoding="sync"
               />
               <div 
                 className={styles.overlay} 
