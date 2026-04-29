@@ -23,18 +23,25 @@ const mapping = [
     { id: 2, pattern: 'Hemasri Podakanti' },
     { id: 3, pattern: 'PALLEPAGA HYMAVATHI' },
     { id: 4, pattern: 'JAHNAVI MUDILI' },
+    { id: 5, pattern: 'karthik tatineni-472' },
     { id: 6, pattern: 'Jeevan Ajmeera' },
     { id: 7, pattern: '22951A0471' }, // Duvasi Kalyani
     { id: 10, pattern: 'Koushik Allada' },
+    { id: 11, pattern: 'Koushik Sreevathsa P N' },
     { id: 12, pattern: 'Murali Krishna' },
     { id: 13, pattern: 'Krishna shri mohan' },
     { id: 14, pattern: 'Lingam Suresh' },
+    { id: 15, pattern: 'Likhitha konka' },
     { id: 17, pattern: 'M Likith Mahendra' },
     { id: 18, pattern: 'Lithik Raj' },
     { id: 19, pattern: 'Lohith Lakkakula' },
+    { id: 20, pattern: 'madhav' },
     { id: 21, pattern: 'Kancharla Mahesh' },
     { id: 23, pattern: 'Mahitha Penkey' },
+    { id: 25, pattern: 'manisakt' },
+    { id: 26, pattern: 'manideep' },
     { id: 28, pattern: 'ballu manikanta' },
+    { id: 30, pattern: 'neha - 494' },
     { id: 31, pattern: 'Mayuri Gongalla' },
     { id: 32, pattern: 'EDHA MEGHANA' },
     { id: 33, pattern: 'meg - RASAMALLA MEGHANA' },
@@ -49,14 +56,17 @@ const mapping = [
     { id: 45, pattern: 'niroosh' },
     { id: 46, pattern: 'nishanth' },
     { id: 47, pattern: 'Nithinreddy Diddakuntla' },
+    { id: 48, pattern: 'nitishkumar bellamkonda' },
     { id: 49, pattern: 'nitish b3' },
     { id: 50, pattern: 'DANTULURI PADMA PRIYA' },
+    { id: 51, pattern: 'paramesh' },
     { id: 52, pattern: 'BANDI PAVAN SAI' },
     { id: 53, pattern: 'PERUGU PAVAN SRI MANIKANTA' },
     { id: 54, pattern: 'Pavani Reddy' },
     { id: 55, pattern: 'Pradeep Kumar' },
     { id: 56, pattern: '4C0 - Medepalli Prajwala' },
     { id: 57, pattern: 'Pranathi B' },
+    { id: 60, pattern: 'chary' },
     { id: 62, pattern: 'Preetham Preetham' },
     { id: 63, pattern: 'Preethi-4c7' },
     { id: 64, pattern: 'Kondakala Priyanka' },
@@ -71,6 +81,8 @@ const mapping = [
 ];
 
 let updatedCount = 0;
+const usedFiles = new Set();
+
 students.forEach(student => {
     const m = mapping.find(item => item.id === student.id);
     const pattern = m ? m.pattern : student.name;
@@ -81,13 +93,24 @@ students.forEach(student => {
         if (!bestFile) bestFile = matchingFiles[0];
 
         student.image = `/Solo Photo/Solo Photo Of Yours (File responses)/${bestFile}`;
-        console.log(`Updated ${student.name} with ${bestFile}`);
+        usedFiles.add(bestFile);
+        console.log(`Mapped: ${student.name} -> ${bestFile}`);
         updatedCount++;
     } else {
-        // Use placeholder if no file found
-        if (!student.image || !student.image.includes('/Solo Photo/')) {
+        // Use placeholder ONLY if no file found and it's not manually set
+        if (!student.image || student.image.includes('ui-avatars.com') || student.image.includes('/Solo Photo/')) {
             student.image = `https://ui-avatars.com/api/?name=${encodeURIComponent(student.name)}&background=1e1e1e&color=C0C0C0&size=512`;
+            console.log(`UNMAPPED STUDENT (Using Placeholder): ${student.name}`);
+        } else {
+            console.log(`UNMAPPED STUDENT (Kept Existing Image): ${student.name}`);
         }
+    }
+});
+
+console.log('\n--- UNMAPPED FILES ---');
+files.forEach(f => {
+    if (!usedFiles.has(f)) {
+        console.log(f);
     }
 });
 
@@ -99,4 +122,5 @@ students.forEach(s => {
 });
 
 fs.writeFileSync(studentsPath, JSON.stringify(students, null, 2));
-console.log(`Successfully updated ${updatedCount} student profile photos.`);
+console.log(`\nSuccessfully updated ${updatedCount} student profile photos.`);
+
