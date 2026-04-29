@@ -12,8 +12,18 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+// Initialize Firebase safely
+let app;
+if (getApps().length > 0) {
+  app = getApp();
+} else if (firebaseConfig.apiKey) {
+  app = initializeApp(firebaseConfig);
+} else {
+  // During build time on some platforms, env vars might be missing.
+  // We initialize with a dummy app or just skip to prevent crashing the prerender.
+  app = initializeApp({ ...firebaseConfig, apiKey: 'dummy-key-for-build' });
+}
+
 const auth = getAuth(app);
 const db = getFirestore(app);
 
