@@ -56,8 +56,10 @@ export default function Timeline() {
   return (
     <section className={`section ${styles.section}`} id="timeline">
       <div className={`container ${styles.container}`}>
-        <div className="section-label reveal">Chronicles</div>
-        <h2 className="reveal">The Journey Timeline</h2>
+        <div className={styles.header}>
+          <div className="section-label reveal">Chronicles // Timeline</div>
+          <h2 className="reveal">The Journey</h2>
+        </div>
         
         <div className={styles.timelineWrapper}>
           <div className={styles.lineBg} />

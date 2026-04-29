@@ -25,8 +25,10 @@
 
 .header p {
   color: var(--color-text-secondary);
-  font-size: var(--text-heading-3);
+  font-size: var(--text-subtitle);
   line-height: var(--leading-relaxed);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* Category Filters */
@@ -186,7 +188,7 @@
   display: block;
   object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1), filter 0.8s ease;
-  filter: brightness(0.9); /* Start slightly dimmed for a premium look */
+  filter: brightness(1); /* Full brightness by default */
 }
 
 .item:hover .image {

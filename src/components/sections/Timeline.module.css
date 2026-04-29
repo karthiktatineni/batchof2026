@@ -9,8 +9,24 @@
   align-items: center;
 }
 
-.container h2 {
-  margin-bottom: var(--space-xl);
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-family: var(--font-display);
+  background: linear-gradient(to right, #fff, var(--color-accent-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.01em;
 }
 
 .timelineWrapper {

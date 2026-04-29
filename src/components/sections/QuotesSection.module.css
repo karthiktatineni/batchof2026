@@ -45,6 +45,32 @@
   z-index: 5;
 }
 
+.quoteBlock {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quoteText {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  background: linear-gradient(to right, #fff, var(--color-accent-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: var(--space-md);
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.author {
+  font-family: var(--font-accent);
+  color: var(--color-accent-gold);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
 @keyframes fadeIn {
   to { opacity: 1; }
 }

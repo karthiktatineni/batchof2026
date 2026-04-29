@@ -46,7 +46,7 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({
       '/Any group Photos Taken by Your batch (File responses)/IMG-20260404-WA0003 - Hemasri Podakanti.jpg',
       '/Any group Photos Taken by Your batch (File responses)/IMG-20260405-WA0009 - Nithinreddy Diddakuntla.jpg',
       '/Any group Photos Taken by Your batch (File responses)/group photo - JAHNAVI MUDILI.jpeg',
-      '/Any group Photos Taken by Your batch (File responses)/IMG_20260314_190526767_HDR_PORTRAIT - Preetham Preetham.jpg',
+      '/Any group Photos Taken by Your batch (File responses)/IMG-20240419-WA0010 - Preetham Preetham.jpg',
     ];
     
     if (images.length === 0) return [];

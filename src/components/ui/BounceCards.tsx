@@ -14,6 +14,7 @@ interface BounceCardsProps {
   easeType?: string;
   transformStyles: string[];
   enableHover?: boolean;
+  onCardClick?: (src: string) => void;
 }
 
 export default function BounceCards({
@@ -26,6 +27,7 @@ export default function BounceCards({
   easeType = 'elastic.out(1, 0.5)',
   transformStyles = [],
   enableHover = false,
+  onCardClick,
 }: BounceCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -83,9 +85,13 @@ export default function BounceCards({
           key={`card-${idx}`}
           ref={(el) => { cardsRef.current[idx] = el; }}
           className={styles.card}
-          style={{ transform: transformStyles[idx] || 'none' }}
+          style={{ 
+            transform: transformStyles[idx] || 'none',
+            cursor: 'pointer' 
+          }}
           onMouseEnter={() => handleMouseEnter(idx)}
           onMouseLeave={() => handleMouseLeave(idx)}
+          onClick={() => onCardClick?.(src)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src} alt={`Memory ${idx + 1}`} className={styles.image} loading="lazy" />

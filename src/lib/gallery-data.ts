@@ -13,9 +13,9 @@ export interface GalleryImage {
 export const galleryImages: GalleryImage[] = [
   {
     "id": "y1_0",
-    "src": "/First year photos or any td pics in specified years (File responses)/1681134828036 - Lithik Raj.jpg",
-    "category": "1st Year",
-    "title": "Lithik Raj"
+    "src": "/WhatsApp Image 2026-04-29 at 10.32.40 AM (2).jpeg",
+    "category": "4th Year",
+    "title": "karthik Tatineni"
   },
   {
     "id": "y1_1",
@@ -115,9 +115,9 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     "id": "y1_17",
-    "src": "/First year photos or any td pics in specified years (File responses)/IMG-20221217-WA0008 - Kanth Balla.jpg",
-    "category": "1st Year",
-    "title": "Kanth Balla"
+    "src": "/group.jpeg",
+    "category": "4th Year",
+    "title": "Karthik Tatineni"
   },
   {
     "id": "y1_18",

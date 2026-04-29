@@ -7,7 +7,6 @@ import { getCdnUrl } from '@/utils/cdn';
 const reels = [
   {
     id: 1,
-    title: 'CLASS VIBES',
     images: [
       '/Any group Photos Taken by Your batch (File responses)/IMG-20260315-WA0081 - B Krishna.jpg',
       '/Any group Photos Taken by Your batch (File responses)/IMG-20260315-WA0068 - EDHA MEGHANA.jpg',
@@ -16,7 +15,6 @@ const reels = [
   },
   {
     id: 2,
-    title: 'THE SQUAD',
     images: [
       '/Any group Photos Taken by Your batch (File responses)/IMG-20260313-WA0542 - Hemasri Podakanti.jpg',
       '/Any group Photos Taken by Your batch (File responses)/IMG-20260404-WA0003 - Hemasri Podakanti.jpg',
@@ -25,7 +23,6 @@ const reels = [
   },
   {
     id: 3,
-    title: 'MEMORIES',
     images: [
       '/Any group Photos Taken by Your batch (File responses)/IMG20260413122612 - 083-manju bhashini.jpg',
       '/Any group Photos Taken by Your batch (File responses)/IMG_20250701_002137 - Niranjan Devana.jpg',
@@ -34,7 +31,6 @@ const reels = [
   },
   {
     id: 4,
-    title: 'FAREWELL',
     images: [
       '/Any group Photos Taken by Your batch (File responses)/IMG-20240421-WA0043 - G. Suresh.jpg',
       '/Any group Photos Taken by Your batch (File responses)/IMG_20240419_234245 - Lithik Raj.jpg',
@@ -120,7 +116,6 @@ export default function StoryReels() {
                   ))}
                 </div>
                 <div className={styles.storyMeta}>
-                  <span className={styles.storyTitle}>{activeReel.title}</span>
                 </div>
               </div>
 
